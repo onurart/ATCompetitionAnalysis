@@ -1,0 +1,5 @@
+﻿using CompetitionAnalysis.Domain.AppEntities;
+namespace CompetitionAnalysis.Application.Features.AppFeatures.MainRoleAndUserRLFeatures.Queries;
+public sealed record GetAllMainRoleAndUserQueryResponse(List<MainRoleAndUserRelationship> mainRoleAndUserRelationships)
+{
+}

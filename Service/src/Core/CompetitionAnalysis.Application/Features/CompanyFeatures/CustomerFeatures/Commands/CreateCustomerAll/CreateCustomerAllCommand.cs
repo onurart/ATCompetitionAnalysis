@@ -1,0 +1,3 @@
+﻿using CompetitionAnalysis.Application.Messaging;
+namespace CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerAll;
+public sealed record CreateCustomerAllCommand : ICommand<CreateCustomerAllCommandResponse>;

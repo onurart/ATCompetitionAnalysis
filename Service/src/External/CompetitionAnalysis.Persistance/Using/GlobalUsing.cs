@@ -1,0 +1,2 @@
+﻿global using CompetitionAnalysis.Persistance.Repositories.GenericRepositories.AppDbContext;
+global using CompetitionAnalysis.Persistance.Repositories.GenericRepositories.CompanyDbContext;

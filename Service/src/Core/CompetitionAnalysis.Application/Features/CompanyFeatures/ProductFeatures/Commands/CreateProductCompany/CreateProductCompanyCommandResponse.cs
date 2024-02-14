@@ -1,0 +1,2 @@
+﻿namespace CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductCompany;
+public sealed record CreateProductCompanyCommandResponse(string Message = "Tüm Ürün kaydı başarıyla tamamlandı!");

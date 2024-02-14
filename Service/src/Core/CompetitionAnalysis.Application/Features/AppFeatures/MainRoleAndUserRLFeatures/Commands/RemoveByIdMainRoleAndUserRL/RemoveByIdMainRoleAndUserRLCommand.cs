@@ -1,0 +1,3 @@
+﻿using CompetitionAnalysis.Application.Messaging;
+namespace CompetitionAnalysis.Application.Features.AppFeatures.MainRoleAndUserRLFeatures.Commands.RemoveByIdMainRoleAndUserRL;
+public sealed record RemoveByIdMainRoleAndUserRLCommand(string Id) : ICommand<RemoveByIdMainRoleAndUserRLCommandResponse>;

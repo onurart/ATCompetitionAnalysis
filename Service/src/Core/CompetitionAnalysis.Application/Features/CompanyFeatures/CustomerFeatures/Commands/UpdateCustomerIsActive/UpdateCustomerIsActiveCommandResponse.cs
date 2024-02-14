@@ -1,0 +1,2 @@
+﻿namespace CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.UpdateCustomerIsActive;
+public sealed record UpdateCustomerIsActiveCommandResponse(string Message = "Müşteri kaydı başarıyla güncellendi!");

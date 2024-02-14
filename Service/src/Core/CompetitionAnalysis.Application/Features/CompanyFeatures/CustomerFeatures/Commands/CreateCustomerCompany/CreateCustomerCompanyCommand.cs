@@ -1,0 +1,3 @@
+﻿using CompetitionAnalysis.Application.Messaging;
+namespace CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerCompany;
+public sealed record CreateCustomerCompanyCommand(string companyId) : ICommand<CreateCustomerCompanyCommandResponse>;
