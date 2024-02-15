@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CompetitionAnalysis.Domain\CompetitionAnalysis.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\CompanyFeatures\ProductCustomerRelationship\Queries\" />
-  </ItemGroup>
-
 </Project>

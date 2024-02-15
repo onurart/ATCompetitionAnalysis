@@ -4,7 +4,7 @@ using CompetitionAnalysis.Application.Features.AppFeatures.MainRoleAndUserRLFeat
 using CompetitionAnalysis.Application.Features.AppFeatures.MainRoleAndUserRLFeatures.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-namespace ATBasketRobotServer.Presentation.Controller;
+namespace ATCompetitionAnalysis.Presentation.Controller;
 public class MainRoleAndUserRelationshipsController : ApiController
 {
     public MainRoleAndUserRelationshipsController(IMediator mediator) : base(mediator) { }

@@ -16,6 +16,9 @@ using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.C
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomer;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerAll;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerCompany;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Commands.CreateProductCustomerRelationship;
+using CompetitionAnalysis.Persistance.Configurations;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries.GetAllProductCustomerRelationship;
 
 namespace CompetitionAnalysis.Persistance.Mapping
 {
@@ -33,6 +36,10 @@ namespace CompetitionAnalysis.Persistance.Mapping
             CreateMap<CreateCustomerCommand, Customer>();
             CreateMap<CreateCustomerAllCommand, List<Customer>>();
             CreateMap<CreateCustomerCompanyCommand, List<Customer>>();
+
+
+
+            CreateMap<GetAllProductCustomerRelationshipQuery, ProductCustomerRelationshipses>();
         }
     }
 }

@@ -39,79 +39,16 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _companyQueryRepository = companyQueryRepository;
             _httpClientFactory = httpClientFactory;
         }
-
-        public async Task CreateProductAll(CreateProductAllCommand request, CancellationToken cancellationToken)
-        {
-            var company = _companyQueryRepository.GetAll();
-            List<Product> products = new List<Product>();
-            foreach (var item in company)
-            {
-                _context = (CompanyDbContext)_contextService.CreateDbContextInstance(item.Id);
-                _commandRepository.SetDbContextInstance(_context);
-                _unitOfWork.SetDbContextInstance(_context);
-                var client = _httpClientFactory.CreateClient();
-                string apiUrl = item.ClientApiUrl;
-                string requestUrl = $"{apiUrl}/BasketRobot/GetAllProducts";
-                var response = await client.GetAsync(requestUrl);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var queryResponse = System.Text.Json.JsonSerializer.Deserialize<List<Product>>(responseBody, options);
-                    products = queryResponse;
-                    products.Select(x => x.Id = Guid.NewGuid().ToString()).ToList();
-                    products.Select(x => x.IsDelete = false).ToList();
-                    await _commandRepository.AddRangeAsync(products, cancellationToken);
-                    await _unitOfWork.SaveChangesAsync(cancellationToken);
-                    products.Clear();
-                }
-            }
-            return;
-        }
-
         public async Task<Product> CreateProductAsync(CreateProductCommand request, CancellationToken cancellationToken)
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(request.companyId);
             _commandRepository.SetDbContextInstance(_context);
             _unitOfWork.SetDbContextInstance(_context);
             Product product = _mapper.Map<Product>(request);
+            product.Id = Guid.NewGuid().ToString();
             await _commandRepository.AddAsync(product, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             return product;
-        }
-
-        public async Task CreateProductCompany(CreateProductCompanyCommand request, CancellationToken cancellationToken)
-        {
-            var ClientApiURL = _companyQueryRepository.GetById(request.companyId, false).Result.ClientApiUrl;
-            List<Product> products = new List<Product>();
-
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(request.companyId);
-            _commandRepository.SetDbContextInstance(_context);
-            _queryRepository.SetDbContextInstance(_context);
-            _unitOfWork.SetDbContextInstance(_context);
-            var masterproducts = _queryRepository.GetAll(false).ToList();
-            var client = _httpClientFactory.CreateClient();
-            string apiUrl = ClientApiURL;
-            string requestUrl = $"{apiUrl}/BasketRobot/GetAllProducts";
-            var response = await client.GetAsync(requestUrl);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
-                string responseBody = await response.Content.ReadAsStringAsync();
-                var queryResponse = JsonSerializer.Deserialize<List<Product>>(responseBody, options);
-                products = queryResponse;
-                products.Select(x => x.Id = Guid.NewGuid().ToString()).ToList();
-                products.Select(x => x.IsDelete = false).ToList();
-                await _commandRepository.AddRangeAsync(products, cancellationToken);
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-            }
         }
         public async Task<IList<Product>> GetAllAsync(string companyId)
         {
@@ -150,7 +87,6 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _commandRepository.Update(product);
             await _unitOfWork.SaveChangesAsync();
         }
-
         public async Task<Product> UpdateProductIsActiveAsync(string id, string companyId, bool isActive)
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);

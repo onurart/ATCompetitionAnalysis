@@ -11,19 +11,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{59
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{41B8DDB8-0190-42F0-97B1-5A8EEEC686A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Application", "Service\src\Core\CompetitionAnalysis.Application\CompetitionAnalysis.Application.csproj", "{F9263FAE-67CA-4354-9EBB-A5F58D57F36A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompetitionAnalysis.Application", "Service\src\Core\CompetitionAnalysis.Application\CompetitionAnalysis.Application.csproj", "{F9263FAE-67CA-4354-9EBB-A5F58D57F36A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Domain", "Service\src\Core\CompetitionAnalysis.Domain\CompetitionAnalysis.Domain.csproj", "{67D59FA2-A104-4F53-A07D-159B2AB71AE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompetitionAnalysis.Domain", "Service\src\Core\CompetitionAnalysis.Domain\CompetitionAnalysis.Domain.csproj", "{67D59FA2-A104-4F53-A07D-159B2AB71AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Infrasturcture", "Service\src\External\CompetitionAnalysis.Infrasturcture\CompetitionAnalysis.Infrasturcture.csproj", "{A1C26D90-DC21-4269-A34B-77DA61053A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompetitionAnalysis.Infrasturcture", "Service\src\External\CompetitionAnalysis.Infrasturcture\CompetitionAnalysis.Infrasturcture.csproj", "{A1C26D90-DC21-4269-A34B-77DA61053A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Persistance", "Service\src\External\CompetitionAnalysis.Persistance\CompetitionAnalysis.Persistance.csproj", "{60276D0A-F23D-45BD-BFBF-3A1C24B75B9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompetitionAnalysis.Persistance", "Service\src\External\CompetitionAnalysis.Persistance\CompetitionAnalysis.Persistance.csproj", "{60276D0A-F23D-45BD-BFBF-3A1C24B75B9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATCompetitionAnalysis.Presentation", "Service\src\External\ATCompetitionAnalysis.Presentation\ATCompetitionAnalysis.Presentation.csproj", "{A2C60E20-42FF-42EC-8A09-C0F0AAAB2837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATCompetitionAnalysis.Presentation", "Service\src\External\ATCompetitionAnalysis.Presentation\ATCompetitionAnalysis.Presentation.csproj", "{A2C60E20-42FF-42EC-8A09-C0F0AAAB2837}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{58A4F701-8C97-4929-ABF8-F3143EFFA97B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.WebApi", "WebApi\CompetitionAnalysis.WebApi\CompetitionAnalysis.WebApi.csproj", "{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompetitionAnalysis.WebApi", "WebApi\CompetitionAnalysis.WebApi\CompetitionAnalysis.WebApi.csproj", "{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{F109B2EA-CD06-4D8B-BB78-B219A19D3627}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Client", "Frontend\CompetitionAnalysis.Client\CompetitionAnalysis.Client.csproj", "{A51AF4C6-8869-455E-B5B5-742D731227AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1ACD414-30F4-4E5E-9A59-283C20714B1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{266E4979-30B4-4582-BD11-823C7C94B0ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionAnalysis.Core", "Frontend\src\Core\CompetitionAnalysis.Core\CompetitionAnalysis.Core.csproj", "{B8F69F5F-B60D-4FAA-A045-1FE428E11980}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +65,14 @@ Global
 		{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51AF4C6-8869-455E-B5B5-742D731227AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51AF4C6-8869-455E-B5B5-742D731227AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51AF4C6-8869-455E-B5B5-742D731227AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51AF4C6-8869-455E-B5B5-742D731227AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F69F5F-B60D-4FAA-A045-1FE428E11980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F69F5F-B60D-4FAA-A045-1FE428E11980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F69F5F-B60D-4FAA-A045-1FE428E11980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F69F5F-B60D-4FAA-A045-1FE428E11980}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +87,10 @@ Global
 		{60276D0A-F23D-45BD-BFBF-3A1C24B75B9E} = {5954DA0E-E775-46EF-9519-89D9297AC792}
 		{A2C60E20-42FF-42EC-8A09-C0F0AAAB2837} = {5954DA0E-E775-46EF-9519-89D9297AC792}
 		{E0A36704-BB8E-4BD9-AD88-7EC32EC6D8FE} = {58A4F701-8C97-4929-ABF8-F3143EFFA97B}
+		{A51AF4C6-8869-455E-B5B5-742D731227AE} = {F109B2EA-CD06-4D8B-BB78-B219A19D3627}
+		{A1ACD414-30F4-4E5E-9A59-283C20714B1B} = {F109B2EA-CD06-4D8B-BB78-B219A19D3627}
+		{266E4979-30B4-4582-BD11-823C7C94B0ED} = {A1ACD414-30F4-4E5E-9A59-283C20714B1B}
+		{B8F69F5F-B60D-4FAA-A045-1FE428E11980} = {266E4979-30B4-4582-BD11-823C7C94B0ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D6D329B-BD6F-438E-A491-F9D2BE49936A}

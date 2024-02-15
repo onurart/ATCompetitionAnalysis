@@ -9,7 +9,7 @@ using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-namespace ATBasketRobotServer.Presentation.Controller;
+namespace ATCompetitionAnalysis.Presentation.Controller;
 public class CustomerController : ApiController
 {
     public CustomerController(IMediator mediator) : base(mediator)

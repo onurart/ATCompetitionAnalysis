@@ -67,8 +67,7 @@ namespace CompetitionAnalysis.Persistance.Context
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property(p => p.CreatedDate)
-                        .CurrentValue = DateTime.Now;
+                    entry.Property(p => p.CreatedDate).CurrentValue = DateTime.Now;
                 }
 
                 if (entry.State == EntityState.Modified)

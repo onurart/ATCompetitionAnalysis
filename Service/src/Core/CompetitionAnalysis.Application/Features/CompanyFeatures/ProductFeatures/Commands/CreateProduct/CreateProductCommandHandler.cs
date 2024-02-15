@@ -18,9 +18,6 @@ public sealed class CreateProductCommandHandler : ICommandHandler<CreateProductC
 
     public async Task<CreateProductCommandResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        Product product = await _service.GetByProductCodeAsync(request.companyId, request.Name, cancellationToken);
-        if (product != null) throw new Exception("Bu hesap planı kodu daha önce tanımlanmış!");
-
         Product createProduct = await _service.CreateProductAsync(request, cancellationToken);
 
         string userId = _apiService.GetUserIdByToken();

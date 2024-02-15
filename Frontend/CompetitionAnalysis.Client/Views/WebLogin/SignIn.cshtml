@@ -1,0 +1,56 @@
+﻿@using CompetitionAnalysis.Core.Features.AppFeatures.Auth.Commands.Login
+@model LoginCommand
+@{
+    Layout = null;
+}
+
+<link href="~/weblogincss/login.css" rel="stylesheet" />
+<link href="~/css/all.min.css" rel="stylesheet" />
+@*<div asp-validation-summary=ModelOnly class="alert alert-danger" role="alert"></div>*@
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        @using (Html.BeginForm("SignIn", "WebLogin", FormMethod.Post))
+        {
+            @Html.ValidationSummary()
+
+            <h2>Giriş Yapın</h2>
+            <input type="" asp-for="EmailOrUserName" placeholder="Email Adresiniz" />
+            <input type="password" asp-for="Password" placeholder="Şifreniz" />
+
+  @*           @if (TempData["Companies"] != null)
+            {
+                var companies = TempData["Companies"] as List<CompanyDto>;
+                if (companies.Count > 1)
+                {
+                    <h3>Şirket Seçiniz:</h3>
+                    foreach (var company in companies)
+                    {
+                        <label>
+                            <input type="radio" name="selectedCompanyId" value="@company.CompanyId" />
+                            @company.CompanyName
+                        </label>
+                        <br />
+                    }
+
+                    // JavaScript code to show the company selection modal
+                    <script>
+                        $(document).ready(function () {
+                            $('#companySelectionModal').modal('show');
+                        });
+                    </script>
+                }
+                else
+                {
+                    // Hidden field to send the selected company ID to the server
+                    <input type="hidden" name="selectedCompanyId" value="@companies[0].CompanyId" />
+                }
+            } *@
+
+            <button type="submit">Giriş Yap</button>
+        }
+    </div>
+    <div class="overlay">
+        <img src="~/weblogincss/logo.png" class="logoCss" />
+    </div>
+</div>
+

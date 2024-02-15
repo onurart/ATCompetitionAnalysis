@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/css/devextreme/dx.light.compact.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+    <script src="~/js/devextreme/jquery.js"></script>
+    <script src="~/js/devextreme/bootstrap.js"></script>
+    <script src="~/js/devextreme/jquery.min.js"></script>
+    <script src="~/assets/vendor_components/popper/dist/popper.min-2.js"></script>
+    <script src="~/assets/vendor_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/devextreme/cldr.js"></script>
+    <script src="~/js/devextreme/cldr/event.js"></script>
+    <script src="~/js/devextreme/cldr/supplemental.js"></script>
+    <script src="~/js/devextreme/cldr/unresolved.js"></script>
+    <script src="~/js/devextreme/globalize.js"></script>
+    <script src="~/js/devextreme/globalize/message.js"></script>
+    <script src="~/js/devextreme/globalize/number.js"></script>
+    <script src="~/js/devextreme/globalize/currency.js"></script>
+    <script src="~/js/devextreme/globalize/date.js"></script>
+    @* <script src="~/js/devextreme/cldr/Core.js"></script> *@
+    <script src="~/js/devextreme/jszip.js"></script>
+    <script src="~/js/devextreme/dx.all.js"></script>
+    <script src="~/js/devextreme/localization/dx.messages.tr.js"></script>
+    <script src="~/js/devextreme/globalize/tr.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
+    <script src="~/js/devextreme/exceljs.js"></script>
+    <script>
+        DevExpress.localization.locale(navigator.language);
+    </script>
+</head>
+<body>
+  
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+  
+</body>
+</html>

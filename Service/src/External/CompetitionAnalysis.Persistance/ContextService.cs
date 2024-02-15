@@ -1,12 +1,7 @@
-﻿using CompetitionAnalysis.Domain.AppEntities;
-using CompetitionAnalysis.Domain;
+﻿using CompetitionAnalysis.Domain;
+using CompetitionAnalysis.Domain.AppEntities;
 using CompetitionAnalysis.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompetitionAnalysis.Persistance
 {
@@ -22,5 +17,6 @@ namespace CompetitionAnalysis.Persistance
             Company company = _appContext.Set<Company>().Find(companyId);
             return new CompanyDbContext(company);
         }
+
     }
 }

@@ -2,7 +2,7 @@ using ATCompetitionAnalysis.Presentation.Abstraction;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.LogFeatures.Queires.GetLogsByTableName;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-namespace ATBasketRobotServer.Presentation.Controller;
+namespace ATCompetitionAnalysis.Presentation.Controller;
 public class LogsController : ApiController
 {
     public LogsController(IMediator mediator) : base(mediator) { }

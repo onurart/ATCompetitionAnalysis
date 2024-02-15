@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetitionAnalysis.Domain.Repositories.CompanyDbContext.ProductCustomerRelationships
 {
-    public interface IProductCustomerRelationshipQueryRepository : ICompanyDbQueryRepository<ProductCustomerRelationship>
+    public interface IProductCustomerRelationshipQueryRepository : ICompanyDbQueryRepository<ProductCustomerRelationshipses>
     {
     }
 }

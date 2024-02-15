@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-namespace ATBasketRobotServer.Presentation.Controller;
+namespace ATCompetitionAnalysis.Presentation.Controller;
 [Authorize(AuthenticationSchemes = "Bearer")]
 
 public class AuthController : ApiController

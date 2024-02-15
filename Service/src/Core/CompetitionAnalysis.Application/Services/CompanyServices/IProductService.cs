@@ -8,8 +8,6 @@ namespace CompetitionAnalysis.Application.Services.CompanyServices
     public interface IProductService
     {
         Task<Product> CreateProductAsync(CreateProductCommand request, CancellationToken cancellationToken);
-        Task CreateProductAll(CreateProductAllCommand request, CancellationToken cancellationToken);
-        Task CreateProductCompany(CreateProductCompanyCommand request, CancellationToken cancellationToken);
         Task<IList<Product>> GetAllAsync(string companyId);
         Task UpdateAsync(Product product, string companyId);
         Task<Product> RemoveByIdProductAsync(string id, string companyId);

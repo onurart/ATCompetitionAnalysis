@@ -1,4 +1,7 @@
 ﻿using ATCompetitionAnalysis.Presentation.Abstraction;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Commands.CreateProductCustomerRelationship;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries.GetAllProductCustomerRelationship;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProduct;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductAll;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductCompany;
@@ -10,7 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace ATCompetitionAnalysis.Presentation.Controller;
-[Authorize(AuthenticationSchemes = "Bearer")]
+//[Authorize(AuthenticationSchemes = "Bearer")]
 public class ProductController : ApiController
 {
     public ProductController(IMediator mediator) : base(mediator) { }
@@ -20,6 +23,13 @@ public class ProductController : ApiController
         CreateProductCommandResponse response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
+    
+    [HttpPost("[action]")]
+    public async Task<IActionResult> CreateProductCustomerRelationship(CreateProductCustomerRelationshipCommand request, CancellationToken cancellationToken)
+    {
+        CreateProductCustomerRelationshipResponse response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
+    }
     [HttpGet("[action]")]
     public async Task<IActionResult> CreateProductAll(CancellationToken cancellationToken)
     {
@@ -27,6 +37,8 @@ public class ProductController : ApiController
         CreateProductAllCommandResponse response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
+  
+
     [AllowAnonymous]
     [HttpGet("[action]/{companyid}")]
     public async Task<IActionResult> CreateProductCompany(string companyid, CancellationToken cancellationToken)
@@ -35,6 +47,15 @@ public class ProductController : ApiController
         CreateProductCompanyCommandResponse response = await _mediator.Send(request, cancellationToken);
         return Ok(response);
     }
+
+
+
+
+
+
+
+
+
     [HttpPost("[action]")]
     public async Task<IActionResult> UpdateProduct(UpdateProductCommand request, CancellationToken cancellationToken)
     {
@@ -52,6 +73,34 @@ public class ProductController : ApiController
     {
         GetAllProductQuery request = new(companyid);
         GetAllProductQueryResponse response = await _mediator.Send(request);
+        return Ok(response);
+    }
+    [HttpGet("[action]/{companyid}")]
+    public async Task<IActionResult> GetAllProductCustomerRes(string companyid)
+    {
+        GetAllProductCustomerRelationshipQuery request = new(companyid);
+        GetAllProductCustomerRelationshipResponse response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [HttpGet("[action]/{companyid}")]
+    public async Task<IActionResult> GetProductCustomerRelationshipDto(string companyid)
+    {
+        ProductCustomerRelationshipQuery request = new(companyid);
+        ProductCustomerRelationshipQueryResponseDto response = await _mediator.Send(request);
         return Ok(response);
     }
     [HttpPost("[action]")]
