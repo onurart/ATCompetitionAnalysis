@@ -12,5 +12,7 @@ namespace CompetitionAnalysis.Persistance.Constans
         public static string Products = nameof(Products);
         public static string ProductCustomerRelationship = nameof(ProductCustomerRelationship);
         public static string Logs = nameof(Logs);
+        public static string Brand = nameof(Brand);
+        public static string Category = nameof(Category);
     }
 }

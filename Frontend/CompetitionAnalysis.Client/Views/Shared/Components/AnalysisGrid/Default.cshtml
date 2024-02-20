@@ -1,0 +1,83 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.GetAllProductCustomerRelationship
+<style>
+    .btnx {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        cursor: pointer;
+    }
+
+    .btn-infox {
+        color: #fff;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+    .btn-smx {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+    }
+
+    .btnx.btn-infox.btn-smx {
+        background-color: #17a2b8; /* Set the desired background color */
+    }
+</style>
+@(Html.DevExtreme().DataGrid<GetProductCustomerRelationship>()
+                .DataSource(d => d.Mvc()
+                .Controller("Home")
+                .LoadAction("GetAlGetProductCustomerRelationship")
+                .Key("ProductId"))
+                .ID("accountGrid")
+                .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
+                .ColumnMinWidth(100)
+                .ColumnAutoWidth(true)
+                .ShowColumnLines(false)
+                .ShowRowLines(true)
+                .RowAlternationEnabled(true)
+                .ShowBorders(false)
+                .Paging(paging => paging.PageSize(9))
+                .Pager(pager =>
+                {
+                    pager.Visible(true);
+                    pager.DisplayMode(GridPagerDisplayMode.Full);
+                    pager.ShowPageSizeSelector(true);
+                    pager.AllowedPageSizes(new JS("[5, 10, 30, 70, 120,'all']"));
+                    pager.ShowInfo(true);
+                    pager.ShowNavigationButtons(true);
+                })
+                .Columns(columns =>
+                {
+                    columns.Add().Caption("İŞLEM").CssClass("btnx btn-infox btn-smx")
+                    .CellTemplate(@<text>
+    <input type="button" class="btnx btn-infox btn-smx" onclick="location.href='@Url.Action("", "")/<%= data.Id %>';" value="Detay" />
+</text>);
+
+                    columns.AddFor(m => m.CustomerName).Caption("RAKİP").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.Specieses).Caption("TÜR").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.BrandName).Caption("MARKA").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.CategoryName).Caption("KATEGORİ").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.Explanation).Caption("AÇİKLAMA").CssClass("text-left text-uppercase");
+@*                    
+                    columns.AddFor(m => m.ProductName).Caption("ÜRÜN ADI").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.Price).Caption("MOTOR FİYATI").CssClass("text-left text-uppercase");
+                    columns.AddFor(m => m.ProductPrice).Caption("PİYASA FİYATİ").CssClass("text-left text-uppercase"); *@
+
+                })
+                .FilterRow(f => f.Visible(true))
+                .HeaderFilter(f => f.Visible(true))
+                .Height(900)
+                .FocusedRowEnabled(true)
+                .FocusedRowKey(1)
+                .ElementAttr("class", "")
+                .Grouping(g => g.AutoExpandAll(false)))

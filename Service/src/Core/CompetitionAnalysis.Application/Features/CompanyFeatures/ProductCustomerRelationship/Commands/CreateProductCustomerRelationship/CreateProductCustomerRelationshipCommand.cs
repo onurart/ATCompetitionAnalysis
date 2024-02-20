@@ -1,4 +1,5 @@
 ﻿using CompetitionAnalysis.Application.Messaging;
+using CompetitionAnalysis.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,15 @@ using System.Windows.Input;
 
 namespace CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Commands.CreateProductCustomerRelationship
 {
-    public sealed record 
+    public sealed record
         CreateProductCustomerRelationshipCommand
         (
         string ProductId,
         string CustomerId,
-        decimal Price,
-        string CompanyId) : ICommand<CreateProductCustomerRelationshipResponse>;
+       decimal Price,
+        string CompanyId,
+        string BrandId,
+        string CategoryId,
+       Specieses Specieses,string Explanation) : ICommand<CreateProductCustomerRelationshipResponse>;
 
 }

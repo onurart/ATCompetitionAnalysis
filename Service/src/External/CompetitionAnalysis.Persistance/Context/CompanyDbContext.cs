@@ -48,7 +48,6 @@ namespace CompetitionAnalysis.Persistance.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //ConnectionString = "Data Source=.;Initial Catalog=ATBasketRobotsMehmetDb;User Id=at;Password=AT123456;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             optionsBuilder.UseSqlServer(ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);

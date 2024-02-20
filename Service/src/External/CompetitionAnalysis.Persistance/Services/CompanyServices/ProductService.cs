@@ -56,48 +56,83 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _queryRepository.SetDbContextInstance(_context);
             return await _queryRepository.GetAll().AsNoTracking().ToListAsync();
         }
-        public async Task<Product> GetByIdAsync(string id, string companyId)
-        {
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-            _queryRepository.SetDbContextInstance(_context);
-            return await _queryRepository.GetById(id);
-        }
-        public async Task<Product> GetByProductCodeAsync(string companyId, string productcode, CancellationToken cancellationToken)
-        {
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-            _queryRepository.SetDbContextInstance(_context);
-            return await _queryRepository.GetFirstByExpiression(p => p.Name == productcode, cancellationToken);
-        }
-        public async Task<Product> RemoveByIdProductAsync(string id, string companyId)
-        {
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-            _commandRepository.SetDbContextInstance(_context);
-            _unitOfWork.SetDbContextInstance(_context);
-            _queryRepository.SetDbContextInstance(_context);
-            Product product = await _queryRepository.GetById(id);
-            _commandRepository.Remove(product);
-            await _unitOfWork.SaveChangesAsync();
-            return product;
-        }
-        public async Task UpdateAsync(Product product, string companyId)
-        {
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-            _commandRepository.SetDbContextInstance(_context);
-            _unitOfWork.SetDbContextInstance(_context);
-            _commandRepository.Update(product);
-            await _unitOfWork.SaveChangesAsync();
-        }
-        public async Task<Product> UpdateProductIsActiveAsync(string id, string companyId, bool isActive)
-        {
-            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-            _commandRepository.SetDbContextInstance(_context);
-            _unitOfWork.SetDbContextInstance(_context);
-            _queryRepository.SetDbContextInstance(_context);
-            Product product = await _queryRepository.GetById(id);
-            product.IsActive = isActive;
-            _commandRepository.Update(product);
-            await _unitOfWork.SaveChangesAsync();
-            return product;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //public async Task<Product> GetByIdAsync(string id, string companyId)
+        //{
+        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+        //    _queryRepository.SetDbContextInstance(_context);
+        //    return await _queryRepository.GetById(id);
+        //}
+        //public async Task<Product> GetByProductCodeAsync(string companyId, string productcode, CancellationToken cancellationToken)
+        //{
+        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+        //    _queryRepository.SetDbContextInstance(_context);
+        //    return await _queryRepository.GetFirstByExpiression(p => p.Name == productcode, cancellationToken);
+        //}
+        //public async Task<Product> RemoveByIdProductAsync(string id, string companyId)
+        //{
+        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+        //    _commandRepository.SetDbContextInstance(_context);
+        //    _unitOfWork.SetDbContextInstance(_context);
+        //    _queryRepository.SetDbContextInstance(_context);
+        //    Product product = await _queryRepository.GetById(id);
+        //    _commandRepository.Remove(product);
+        //    await _unitOfWork.SaveChangesAsync();
+        //    return product;
+        //}
+        //public async Task UpdateAsync(Product product, string companyId)
+        //{
+        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+        //    _commandRepository.SetDbContextInstance(_context);
+        //    _unitOfWork.SetDbContextInstance(_context);
+        //    _commandRepository.Update(product);
+        //    await _unitOfWork.SaveChangesAsync();
+        //}
+        //public async Task<Product> UpdateProductIsActiveAsync(string id, string companyId, bool isActive)
+        //{
+        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+        //    _commandRepository.SetDbContextInstance(_context);
+        //    _unitOfWork.SetDbContextInstance(_context);
+        //    _queryRepository.SetDbContextInstance(_context);
+        //    Product product = await _queryRepository.GetById(id);
+        //    product.IsActive = isActive;
+        //    _commandRepository.Update(product);
+        //    await _unitOfWork.SaveChangesAsync();
+        //    return product;
+        //}
     }
 }

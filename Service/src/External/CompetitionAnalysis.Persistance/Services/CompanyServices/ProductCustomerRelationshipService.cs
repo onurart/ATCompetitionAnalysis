@@ -4,6 +4,7 @@ using CompetitionAnalysis.Application.Services.CompanyServices;
 using CompetitionAnalysis.Domain;
 using CompetitionAnalysis.Domain.CompanyEntities;
 using CompetitionAnalysis.Domain.Dtos;
+using CompetitionAnalysis.Domain.Enums;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.ProductCustomerRelationships;
 using CompetitionAnalysis.Domain.UnitOfWorks;
 using CompetitionAnalysis.Persistance.Context;
@@ -46,42 +47,30 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _queryRepository.SetDbContextInstance(_context);
             return await _queryRepository.GetAll().AsNoTracking().ToListAsync();
         }
-
         public async Task<IList<ProductCustomerRelationshipDto>> GetAllDtoAsync(string companyId)
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
             _queryRepository.SetDbContextInstance(_context);
-            var result = await _queryRepository.GetAll().Include("Product").Include("Customer").ToListAsync();
+            var result = await _queryRepository.GetAll().Include("Product").Include("Customer").Include("Category").Include("Brand").ToListAsync();
             List<ProductCustomerRelationshipDto> dto = new();
-
             foreach (var item in result)
             {
                 dto.Add(new ProductCustomerRelationshipDto()
                 {
+                    CategoryName = item.Category.CategoryName,
+                    CategoryId = item.Category.Id,
+                    BrandId = item.Brand.Id,
+                    BrandName = item.Brand.BrandName,
                     CustomerName = item.Customer.Name,
                     CustomerId = item.Customer.Id,
-
                     ProductId = item.Product.Id,
                     ProductName = item.Product.Name,
                     ProductPrice = item.Product.Price,
-
-
-
                     Price = item.Price,
-                    //AsinPrice = item.Product.Price
-
-
-
-                 //  ProductId = item.Product.Id,
-                   // ProductName = item.Product.Name,
-                    //
-
-                    //CustomerId = item.Customer.Id,
-                    //CustomerName = item.Customer.Name,
-
-
-                    //AsinPrice = item.Price,
-
+                    CreatedDate = item.CreatedDate,
+                    Explanation = item.Explanation,
+                    Specieses = EnumHelper.GetDisplayName(item.Specieses)
+                   
                 });
             }
             return dto;

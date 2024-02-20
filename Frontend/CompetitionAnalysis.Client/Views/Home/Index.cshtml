@@ -1,43 +1,216 @@
 ﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.GetAllProductCustomerRelationship
 @{
     ViewData["Title"] = "Home Page";
-} 
+}
+
+<div id="page-wrapper">
+    <div class="content">
+
+        <div class="content-header">
+            <div class="header-icon">
+                <i class="pe-7s-tools"></i>
+            </div>
+            <div class="header-title">
+                <h1>Adminpage - Responsive Bootstrap Admin Template Dashboard</h1>
+                <small>Very detailed &amp; featured admin.</small>
+                <ol class="breadcrumb">
+                    <li><a href="index.html"><i class="pe-7s-home"></i> Home</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </div>
+            <div class="container">
+                
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="statistic-box statistic-filled-3">
+                        <h2><span class="count-number">789</span>K <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i> +29%</span></h2>
+                        <div class="small">Social users </div>
+                        <i class="ti-world statistic_icon"></i>
+                        <div class="sparkline3 text-center"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="statistic-box statistic-filled-1">
+                        <h2><span class="count-number">696</span>K <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i> +28%</span></h2>
+                        <div class="small">Visitors this Month</div>
+                        <i class="ti-server statistic_icon"></i>
+                        <div class="sparkline1 text-center"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="statistic-box statistic-filled-2">
+                        <h2><span class="count-number">321</span>M <span class="slight"><i class="fa fa-play fa-rotate-90 c-white"> </i> +10%</span> </h2>
+                        <div class="small">Total users</div>
+                        <i class="ti-user statistic_icon"></i>
+                        <div class="sparkline2 text-center"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="statistic-box statistic-filled-4">
+                        <h2><span class="count-number">5489</span>$ <span class="slight"><i class="fa fa-play fa-rotate-90 c-white"> </i> +24%</span></h2>
+                        <div class="small">Total Sales</div>
+                        <i class="ti-bag statistic_icon"></i>
+                        <div class="sparkline4 text-center"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                    <div class="panel panel-bd ">
+                        <div class="panel-body">
+                            <div id="chartdiv"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
 
 
-@(Html.DevExtreme().DataGrid<GetProductCustomerRelationship>()
-        .DataSource(d => d.Mvc()
-        .Controller("Home")
-        .LoadAction("GetAlGetProductCustomerRelationship")
-        .Key("ProductId"))
-        .ID("accountGrid")
-        .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
-        .ColumnMinWidth(100)
-        .ColumnAutoWidth(true)
-        .ShowColumnLines(false)
-        .ShowRowLines(true)
-        .RowAlternationEnabled(true)
-        .ShowBorders(false)
-        .Paging(paging => paging.PageSize(9))
-        .Pager(pager =>
-        {
-            pager.Visible(true);
-            pager.DisplayMode(GridPagerDisplayMode.Full);
-            pager.ShowPageSizeSelector(true);
-            pager.AllowedPageSizes(new JS("[5, 10, 30, 70, 120,'all']"));
-            pager.ShowInfo(true);
-            pager.ShowNavigationButtons(true);
-        })
-        .Columns(columns =>
-        {
-            columns.AddFor(m => m.CustomerName).Caption("MÜŞTERİ").CssClass("text-left text-uppercase");
-            columns.AddFor(m => m.ProductName).Caption("ÜRÜN ADI").CssClass("text-left text-uppercase");
-            columns.AddFor(m => m.Price).Caption("MOTOR FİYATI").CssClass("text-left text-uppercase");
-          columns.AddFor(m => m.ProductPrice).Caption("PİYASA FİYATİ").CssClass("text-left text-uppercase");
-        })
-        .FilterRow(f => f.Visible(true))
-        .HeaderFilter(f => f.Visible(true))
-        .Height(900)
-        .FocusedRowEnabled(true)
-        .FocusedRowKey(1)
-        .ElementAttr("class", "")
-        .Grouping(g => g.AutoExpandAll(false)))
+                
+                
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+                    <div class="panel panel-bd ">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <i class="ti-truck"></i>
+                                <h4>Contacts</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Street Address</th>
+                                            <th>% Share</th>
+                                            <th>City</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <figure class="user-avatar small">
+                                                    <img src="assets/dist/img/avatar.png" class="img-responsive" alt="user-image">
+                                                </figure>
+                                            </td>
+                                            <td>Naeem Khan</td>
+                                            <td>123 456 7890</td>
+                                            <td>294-318 Duis Ave</td>
+                                            <td>
+                                                <div class="sparkline5"></div>
+                                            </td>
+                                            <td>Noakhali</td>
+                                            <td><a href="#" class="btn btn-success btn-xs">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <figure class="user-avatar small">
+                                                    <img src="assets/dist/img/avatar2.png" class="img-responsive" alt="user-image">
+                                                </figure>
+                                            </td>
+                                            <td>Tuhin Sarkar</td>
+                                            <td>123 456 7890</td>
+                                            <td>680-1097 Mi Rd.</td>
+                                            <td>
+                                                <div class="sparkline6"></div>
+                                            </td>
+                                            <td>Lavoir</td>
+                                            <td><a href="#" class="btn btn-success btn-xs active">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <figure class="user-avatar small">
+                                                    <img src="assets/dist/img/avatar6.png" class="img-responsive" alt="user-image">
+                                                </figure>
+                                            </td>
+                                            <td>Tanjil Ahmed</td>
+                                            <td>456 789 1230</td>
+                                            <td>Ap #289-8161 In Avenue</td>
+                                            <td>
+                                                <div class="sparkline7"></div>
+                                            </td>
+                                            <td>Dhaka</td>
+                                            <td><a href="#" class="btn btn-success btn-xs">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <figure class="user-avatar small">
+                                                    <img src="assets/dist/img/avatar3.png" class="img-responsive" alt="user-image">
+                                                </figure>
+                                            </td>
+                                            <td>Sourav</td>
+                                            <td>789 123 4560</td>
+                                            <td>226-4861 Augue. St.</td>
+                                            <td>
+                                                <div class="sparkline5"></div>
+                                            </td>
+                                            <td>Rongpur</td>
+                                            <td><a href="#" class="btn btn-success btn-xs">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <figure class="user-avatar small">
+                                                    <img src="assets/dist/img/avatar7.png" class="img-responsive" alt="user-image">
+                                                </figure>
+                                            </td>
+                                            <td>Jahangir Alam</td>
+                                            <td>(01662) 59083</td>
+                                            <td>3219 Elit Avenue</td>
+                                            <td>
+                                                <div class="sparkline6"></div>
+                                            </td>
+                                            <td>Chittagong</td>
+                                            <td><a href="#" class="btn btn-success btn-xs">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3 hidden-sm hidden-md">
+                    <div class="social-widget">
+                        <ul>
+                            <li>
+                                <div class="fb_inner">
+                                    <i class="fa fa-facebook"></i>
+                                    <span class="sc-num">5,791</span>
+                                    <small>Fans</small>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="twitter_inner">
+                                    <i class="fa fa-twitter"></i>
+                                    <span class="sc-num">691</span>
+                                    <small>Followers</small>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="g_plus_inner">
+                                    <i class="fa fa-google-plus"></i>
+                                    <span class="sc-num">147</span>
+                                    <small>Followers</small>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dribble_inner">
+                                    <i class="fa fa-dribbble"></i>
+                                    <span class="sc-num">3,485</span>
+                                    <small>Followers</small>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

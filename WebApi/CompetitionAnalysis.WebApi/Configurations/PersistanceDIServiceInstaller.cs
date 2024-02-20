@@ -6,6 +6,8 @@ using CompetitionAnalysis.Domain.Repositories.AppDbContext.MainRoleAndUserRelati
 using CompetitionAnalysis.Domain.Repositories.AppDbContext.MainRoleReporistories;
 using CompetitionAnalysis.Domain.Repositories.AppDbContext.UserAndCompanyRelationshipRepositories;
 using CompetitionAnalysis.Domain.Repositories.AppDbContext.UserRoleRepositories;
+using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.BrandRepositories;
+using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.CategoryRepository;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.CustomerRepositories;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.LogRepositories;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.ProductCustomerRelationships;
@@ -17,6 +19,8 @@ using CompetitionAnalysis.Persistance.Repositories.AppDbContext.MainRoleAndUserR
 using CompetitionAnalysis.Persistance.Repositories.AppDbContext.MainRoleRepositories;
 using CompetitionAnalysis.Persistance.Repositories.AppDbContext.UserAndCompanyRelationshipCommandRepository;
 using CompetitionAnalysis.Persistance.Repositories.AppDbContext.UserRoleRepositories;
+using CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.BrandRepositories;
+using CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.CategoryRepository;
 using CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.CustomerRepositories;
 using CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.LogRepositories;
 using CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.ProductCustomerRelationships;
@@ -30,11 +34,11 @@ namespace CompetitionAnalysis.WebApi.Configurations
     {
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
-           #region Context UnitOfWork
-        services.AddScoped<ICompanyDbUnitOfWork, CompanyDbUnitOfWork>();
-        services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
-        services.AddScoped<IContextService, ContextService>();
-        #endregion
+            #region Context UnitOfWork
+            services.AddScoped<ICompanyDbUnitOfWork, CompanyDbUnitOfWork>();
+            services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
+            services.AddScoped<IContextService, ContextService>();
+            #endregion
 
             #region Services
             #region CompanyDbContext
@@ -42,7 +46,8 @@ namespace CompetitionAnalysis.WebApi.Configurations
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IProductCustomerRelationshipService, ProductCustomerRelationshipService>();
-            
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBrandService, BrandService>();
             #endregion
 
             #region AppDbContext
@@ -62,14 +67,19 @@ namespace CompetitionAnalysis.WebApi.Configurations
             services.AddScoped<ILogQueryRepository, LogQueryRepository>();
             services.AddScoped<IProductCommandRepository, ProductCommandRepository>();
             services.AddScoped<IProductQueryRepository, ProductQueryRepository>();
-
             services.AddScoped<ICustomerCommandRepository, CustomerCommandRepository>();
             services.AddScoped<ICustomerQueryRepository, CustomerQueryRepository>();
-           services.AddScoped<IProductCustomerRelationshipCommandRepository, ProductCustomerRelationshipsCommandRepository>();
-           services.AddScoped<IProductCustomerRelationshipQueryRepository, ProductCustomerRelationshipsQueryRepository>();
+            services.AddScoped<IProductCustomerRelationshipCommandRepository, ProductCustomerRelationshipsCommandRepository>();
+            services.AddScoped<IProductCustomerRelationshipQueryRepository, ProductCustomerRelationshipsQueryRepository>();
+            services.AddScoped<ICategoryCommandRepository, CategoryCommandRepository>();
+            services.AddScoped<ICategoryQueryRepository, CategoryQueryRepository>();
+
+            services.AddScoped<IBrandCommandRepository, BrandCommandRepository>();
+            services.AddScoped<IBrandQueryRepository, BrandQueryRepository>();
+
 
             services.AddHttpClient();
-     
+
             #endregion
 
 
