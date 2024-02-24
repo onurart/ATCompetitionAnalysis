@@ -12,9 +12,7 @@ namespace CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustom
     public sealed record
         CreateProductCustomerRelationshipCommand
         (
-        string ProductId,
         string CustomerId,
-       decimal Price,
         string CompanyId,
         string BrandId,
         string CategoryId,

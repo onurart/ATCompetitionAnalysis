@@ -32,14 +32,14 @@ namespace CompetitionAnalysis.Persistance.Mapping
 
 
 
-            CreateMap<CreateCustomerAllCommand, List<Customer>>();
-
-            CreateMap<GetAllBrandQuery, Brand>();
-
-            CreateMap<CreateProductAllCommand, List<Product>>();
-            CreateMap<CreateProductCompanyCommand, List<Product>>();
             CreateMap<GetAllProductCustomerRelationshipQuery, ProductCustomerRelationshipses>();
+            CreateMap<CreateCustomerAllCommand, List<Customer>>();
+            CreateMap<CreateProductAllCommand, List<Product>>();
+            CreateMap<GetAllBrandQuery, List<Brand>>();
             CreateMap<GetAllCategoryQuery, Category>();
+            CreateMap<CreateProductCompanyCommand, List<Product>>();
+
+
         
         
         

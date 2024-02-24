@@ -1,460 +1,311 @@
-//[Preview Menu Javascript]
+"use strict"
 
-//Project:	VoiceX Admin - Responsive Admin Template
-//Primary use:   This file is for demo purposes only.
+var themeOptionArr = {
+			typography: '',
+			version: '',
+			layout: '',
+			primary: '',
+			
+			navheaderBg: '',
+			sidebarBg: '',
+			sidebarStyle: '',
+			sidebarPosition: '',
+			headerPosition: '',
+			containerLayout: '',
+			//direction: '',
+		};
+		
+		
 
-$(function () {
-  'use strict'
+/* Cookies Function */
+function setCookie(cname, cvalue, exhours) 
+	{
+		var d = new Date();
+		d.setTime(d.getTime() + (30*60*1000)); /* 30 Minutes */
+		var expires = "expires="+ d.toString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
 
+function getCookie(cname) 
+	{
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
 
-  /**
-   * Get access to plugins
-   */
+function deleteCookie(cname) 
+	{
+		var d = new Date();
+		d.setTime(d.getTime() + (1)); // 1/1000 second
+		var expires = "expires="+ d.toString();
+		//document.cookie = cname + "=1;" + expires + ";path=/";
+		document.cookie = cname + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT"+";path=/";
+	}
 
-  $('[data-toggle="control-sidebar"]').controlSidebar()
-  $('[data-toggle="push-menu"]').pushMenu()
+function deleteAllCookie(reload = true)
+	{
+		jQuery.each(themeOptionArr, function(optionKey, optionValue) {
+				deleteCookie(optionKey);
+		});
+		if(reload){
+			location.reload();
+		}
+	}
+ 	
+/* Cookies Function END */	
+ 	
 
-  var $pushMenu       = $('[data-toggle="push-menu"]').data('lte.pushmenu')
-  var $controlSidebar = $('[data-toggle="control-sidebar"]').data('lte.controlsidebar')
-  var $layout         = $('body').data('lte.layout')
-
-  /**
-   * List of all the available themes
-   *
-   * @type Array
-   */
-  var mySkins = [
-    'theme-fruit',
-    'theme-purple',
-    'theme-oceansky',
-    'theme-rosegold',
-    'theme-ultraviolet',
-    'theme-botani',
-    'theme-ubuntu',
-    'theme-patriot',
-    'theme-vintage',
-    'theme-mint',
-    'theme-deepocean',
-    'theme-school',
-    'theme-leaf',
-    'theme-metalred',
-    'theme-grey',
-  ]
-
-  /**
-   * Get a prestored setting
-   *
-   * @param String name Name of of the setting
-   * @returns String The value of the setting | null
-   */
-  function get(name) {
-    if (typeof (Storage) !== 'undefined') {
-      return localStorage.getItem(name)
-    } else {
-      window.alert('Please use a modern browser to properly view this template!')
-    }
-  }
-
-  /**
-   * Store a new settings in the browser
-   *
-   * @param String name Name of the setting
-   * @param String val Value of the setting
-   * @returns void
-   */
-  function store(name, val) {
-    if (typeof (Storage) !== 'undefined') {
-      localStorage.setItem(name, val)
-    } else {
-      window.alert('Please use a modern browser to properly view this template!')
-    }
-  }
-
-  /**
-   * Toggles layout classes
-   *
-   * @param String cls the layout class to toggle
-   * @returns void
-   */
-  function changeLayout(cls) {
-    $('body').toggleClass(cls)
-    if ($('body').hasClass('fixed') && cls == 'fixed') {
-      $pushMenu.expandOnHover()
-      $layout.activate()
-    }
-    $controlSidebar.fix()
-  }
-
-  /**
-   * Replaces the old skin with the new skin
-   * @param String cls the new skin class
-   * @returns Boolean false to prevent link's default action
-   */
-  function changeSkin(cls) {
-    $.each(mySkins, function (i) {
-      $('body').removeClass(mySkins[i])
-    })
-
-    $('body').addClass(cls)
-    store('theme', cls)
-    return false
-  }
-
-  /**
-   * Retrieve default settings and apply them to the template
-   *
-   * @returns void
-   */
-  function setup() {
-    var tmp = get('theme')
-    if (tmp && $.inArray(tmp, mySkins))
-      changeSkin(tmp)
-
-    // Add the change skin listener
-    $('[data-theme]').on('click', function (e) {
-      if ($(this).hasClass('knob'))
-        return
-      e.preventDefault()
-      changeSkin($(this).data('theme'))
-    })
-
-    // Add the layout manager
-    $('[data-layout]').on('click', function () {
-      changeLayout($(this).data('layout'))
-    })
-
-    $('[data-controlsidebar]').on('click', function () {
-      changeLayout($(this).data('controlsidebar'))
-      var slide = !$controlSidebar.options.slide
-
-      $controlSidebar.options.slide = slide
-      if (!slide)
-        $('.control-sidebar').removeClass('control-sidebar-open')
-    })
-
-
-    $('[data-enable="expandOnHover"]').on('click', function () {
-      $(this).attr('disabled', true)
-      $pushMenu.expandOnHover()
-      if (!$('body').hasClass('sidebar-collapse'))
-        $('[data-layout="sidebar-collapse"]').click()
-    })
-
-    $('[data-enable="rtl"]').on('click', function () {
-      $(this).attr('disabled', true)
-      $pushMenu.expandOnHover()
-      if (!$('body').hasClass('rtl'))
-        $('[data-layout="rtl"]').click()
-    })
-
-	  	
-
-    $('[data-mainsidebarskin="toggle"]').on('click', function () {
-      var $sidebar = $('body')
-      if ($sidebar.hasClass('dark-skin')) {
-        $sidebar.removeClass('dark-skin')
-        $sidebar.addClass('light-skin')
-      } else {
-        $sidebar.removeClass('light-skin')
-        $sidebar.addClass('dark-skin')
-      }
-    })
-
-    //  Reset options
-    if ($('body').hasClass('fixed')) {
-      $('[data-layout="fixed"]').attr('checked', 'checked')
-    }
-    if ($('body').hasClass('layout-boxed')) {
-      $('[data-layout="layout-boxed"]').attr('checked', 'checked')
-    }
-    if ($('body').hasClass('sidebar-collapse')) {
-      $('[data-layout="sidebar-collapse"]').attr('checked', 'checked')
-    }
-    if ($('body').hasClass('rtl')) {
-      $('[data-layout="rtl"]').attr('checked', 'checked')
-    }
-   // if ($('body').hasClass('dark')) {
-//      $('[data-layout="dark"]').attr('checked', 'checked')
-//    }
-
-  }
-
-  // Create the new tab
-  var $tabPane = $('<div />', {
-    'id'   : 'control-sidebar-theme-demo-options-tab',
-    'class': 'tab-pane active'
-  })
-
-  // Create the tab button
-  var $tabButton = $('<li />', { 'class': 'nav-item' })
-    .html('<a href=\'#control-sidebar-theme-demo-options-tab\' class=\'active\' data-toggle=\'tab\'  title=\'Setting\'>'
-      + '<i class="ti-settings"></i>'
-      + '</a>')
-
-  // Add the tab button to the right sidebar tabs
-  $('[href="#control-sidebar-home-tab"]')
-    .parent()
-    .before($tabButton)
-
-  // Create the menu
-  var $demoSettings = $('<div />')
-  
-  var $skinsList = $('<ul />', { 'class': 'list-inline clearfix theme-switch' })
-
-  // Dark sidebar skins
-  var $themeFruit =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-fruit" style="display: inline-block;vertical-align: middle;" class="clearfix active bg-gradient-fruit rounded w-40 h-40" title="Theme Fruit">'
-            + '</a>')
-  $skinsList.append($themeFruit)
+(function($) {
 	
-  var $themePurple =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-purple" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-purple rounded w-40 h-40" title="Theme Purple">'
-            + '</a>')
-  $skinsList.append($themePurple)
+	"use strict"
 	
-  var $themeOceansky =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-oceansky" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-oceansky rounded w-40 h-40" title="Theme Oceansky">'
-            + '</a>')
-  $skinsList.append($themeOceansky)
+	//var direction =  getUrlParams('dir');
+	var theme =  getUrlParams('theme');
 	
-  var $themeRosegold =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-rosegold" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-rosegold rounded w-40 h-40" title="Theme Rosegold">'
-            + '</a>')
-  $skinsList.append($themeRosegold)
+	/* Dlab Theme Demo Settings  */
 	
-  var $themeUltraviolet =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-ultraviolet" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-ultraviolet rounded w-40 h-40" title="Theme Ultraviolet">'
-            + '</a>')
-  $skinsList.append($themeUltraviolet)
+	var dezThemeSet0 = { /* Default Theme */
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_1",
+		navheaderBg: "color_1",
+		sidebarBg: "color_1",
+		sidebarStyle: "full",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeBotani =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-botani" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-botani rounded w-40 h-40" title="Theme Botani">'
-            + '</a>')
-  $skinsList.append($themeBotani)
+	var dezThemeSet1 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_1",
+		navheaderBg: "color_3",
+		sidebarBg: "color_3",
+		sidebarStyle: "full",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeUbuntu =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-ubuntu" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-ubuntu rounded w-40 h-40" title="Theme Ubuntu">'
-            + '</a>')
-  $skinsList.append($themeUbuntu)
+	var dezThemeSet2 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_4",
+		navheaderBg: "color_4",
+		sidebarBg: "color_4",
+		sidebarStyle: "compact",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themePatriot =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-patriot" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-patriot rounded w-40 h-40" title="Theme Patriot">'
-            + '</a>')
-  $skinsList.append($themePatriot)
 	
-  var $themeVintage =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-vintage" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-vintage rounded w-40 h-40" title="Theme Vintage">'
-            + '</a>')
-  $skinsList.append($themeVintage)
+	var dezThemeSet3 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_7",
+		navheaderBg: "color_7",
+		sidebarBg: "color_7",
+		sidebarStyle: "full",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeMint =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-mint" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-mint rounded w-40 h-40" title="Theme Mint">'
-            + '</a>')
-  $skinsList.append($themeMint)
+	var dezThemeSet4 = {
+		typography: "cairo",
+		version: "dark",
+		layout: "vertical",
+		primary: "color_1",
+		navheaderBg: "color_3",
+		sidebarBg: "color_3",
+		sidebarStyle: "full",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeDeepocean =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-deepocean" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-deepocean rounded w-40 h-40" title="Theme Deepocean">'
-            + '</a>')
-  $skinsList.append($themeDeepocean)
+	var dezThemeSet5 = {
+		typography: "cairo",
+		version: "light",
+		layout: "horizontal",
+		primary: "color_5",
+		navheaderBg: "color_1",
+		sidebarBg: "color_5",
+		sidebarStyle: "full",
+		sidebarPosition: "fixed",
+		headerPosition: "static",
+		containerLayout: "full",
+	};
 	
-  var $themeSchool =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-school" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-school rounded w-40 h-40" title="Theme School">'
-            + '</a>')
-  $skinsList.append($themeSchool)
+	var dezThemeSet6 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_10",
+		navheaderBg: "color_1",
+		sidebarBg: "color_10",
+		sidebarStyle: "mini",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeLeaf =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-leaf" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-leaf rounded w-40 h-40" title="Theme Leaf">'
-            + '</a>')
-  $skinsList.append($themeLeaf)
+	var dezThemeSet7 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_6",
+		navheaderBg: "color_1",
+		sidebarBg: "color_1",
+		sidebarStyle: "compact",
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeMetalred =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-metalred" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-metalred rounded w-40 h-40" title="Theme Metalred">'
-            + '</a>')
-  $skinsList.append($themeMetalred)
+	var dezThemeSet8 = {
+		typography: "cairo",
+		version: "light",
+		layout: "vertical",
+		primary: "color_15",
+		navheaderBg: "color_15",
+		sidebarBg: "color_15",
+		sidebarStyle: "icon-hover",		   
+		sidebarPosition: "fixed",
+		headerPosition: "fixed",
+		containerLayout: "full",
+	};
 	
-  var $themeGrey =
-        $('<li />', { style: 'padding: 5px;line-height: 25px;' })
-          .append('<a href="javascript:void(0)" data-theme="theme-grey" style="display: inline-block;vertical-align: middle;" class="clearfix bg-gradient-grey rounded w-40 h-40" title="Theme Grey">'
-            + '</a>')
-  $skinsList.append($themeGrey)
+		
+	function themeChange(theme){
+		var themeSettings = {};
+		themeSettings = eval('dezThemeSet'+theme);
+		dezSettingsOptions = themeSettings; /* For Screen Resize */
+		new dezSettings(themeSettings);
+		
+		setThemeInCookie(themeSettings);
+	}
 	
+	function setThemeInCookie(themeSettings)
+	{
+		//console.log(themeSettings);
+		jQuery.each(themeSettings, function(optionKey, optionValue) {
+			setCookie(optionKey,optionValue);
+		});
+	}
+	
+	function setThemeLogo() {
+		var logo = getCookie('logo_src');
+		
+		var logo2 = getCookie('logo_src2');
+		
+		if(logo != ''){
+			jQuery('.nav-header .logo-abbr').attr("src", logo);
+		}
+		
+		if(logo2 != ''){
+			jQuery('.nav-header .logo-compact, .nav-header .brand-title').attr("src", logo2);
+		}
+	}
+	
+	function setThemeOptionOnPage()
+	{
+		if(getCookie('version') != '')
+		{
+			jQuery.each(themeOptionArr, function(optionKey, optionValue) {
+				var optionData = getCookie(optionKey);
+				themeOptionArr[optionKey] = (optionData != '')?optionData:dezSettingsOptions[optionKey];
+			});
+			//console.log(themeOptionArr);
+			dezSettingsOptions = themeOptionArr;
+			new dezSettings(dezSettingsOptions);
+			
+			setThemeLogo();
+		}
+	}
+	/*  set switcher option start  */
+	function getElementAttrs(el) {
+	  return [].slice.call(el.attributes).map((attr) => {
+		return {
+		  name: attr.name,
+		  value: attr.value
+		}
+	  });
+	}
+	
+	function handleSetThemeOption(item, index, arr) {
+		var attrName = item.name.replace('data-','').replace('-','_');
+		if(attrName === "sidebarbg" || attrName === "primary"){
+			if(item.value === "color_1"){
+				return false;
+			}
+			var attrNameColor = attrName.replace("bg","")
+			document.getElementById(attrNameColor+"_"+item.value).checked = true;
+		}else if(attrName === "direction" || attrName === "nav_headerbg" || attrName === "headerbg"){
+		}else if(attrName === "sidebar_style" || attrName === "sidebar_position" || attrName === "header_position" || attrName === "typography" || attrName === "theme_version" ){
+			if(item.value === "cairo" || item.value === "full" || item.value === "fixed"|| item.value === "light"){return false}
+			document.getElementById(attrName).value = item.value;				
+		}else if(attrName === "layout"){
+			if(item.value === "vertical"){return false}
+			document.getElementById("theme_layout").value = item.value;		
+		}
+		else if(attrName === "container"){
+			if(item.value === "wide"){return false}
+			document.getElementById("container_layout").value = item.value;				
+		}
+		$('.default-select').niceSelect('update');
+	}
+	
+	/* / set switcher option end / */
+	
+	jQuery(document).on('click', '.dlab_theme_demo', function(){
+		setTimeout(() => {
+			var allAttrs = getElementAttrs(document.querySelector('body'));
+			allAttrs.forEach(handleSetThemeOption);
+		},1500);
+		var demoTheme = jQuery(this).data('theme');
+		themeChange(demoTheme, 'ltr');
+	});
 
-  
 
-  $demoSettings.append('<h4 class="control-sidebar-heading">Theme Colors</h4>')
-  $demoSettings.append($skinsList)
-  
-    // Layout options
-  $demoSettings.append(
-    '<h4 class="control-sidebar-heading">'
-    + 'Background Size'
-    + '</h4>'
-	  
-    // Theme Skin Toggle	  
-	+ '<div class="flexbox mb-10 pb-10 bb-1">'
-	+ '<label class="control-sidebar-subheading w-p100 mt-5">'
-    + 'Choose Size'
-    + '</label>'
-	+ '<select id="bg-size" class="bg-size custom-select">'
-	//+ '<option value="full">Full</option>'
-	+ '<option value="wave">Wave</option>'
-    + '<option value="half" selected="">Half</option>'
-    + '<option value="header">Header</option>'
-    + '</select>'
-	+ '</div>'
-	  
-	
-  )
-	
-  
-  // Layout options
-  $demoSettings.append(
-    '<h4 class="control-sidebar-heading">'
-    + 'Dark or Light Skin'
-    + '</h4>'
-	  
-    // Theme Skin Toggle	  
-	+ '<div class="flexbox mb-10 pb-10 bb-1">'
-	+ '<label for="toggle_left_sidebar_skin" class="control-sidebar-subheading">'
-    + 'Turn Dark/Light'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-mainsidebarskin="toggle" id="toggle_left_sidebar_skin">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'
-	  
-	
-  )
-	
-  // Layout options
-  $demoSettings.append(
-    '<h4 class="control-sidebar-heading">'
-    + 'RTL or LTR'
-    + '</h4>'
-	  
-    // rtl layout
-	+ '<div class="flexbox mb-10 pb-10 bb-1">'
-	+ '<label for="rtl" class="control-sidebar-subheading">'
-    + 'Turn RTL/LTR'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-layout="rtl" id="rtl">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'
-  )
-
-
-  // Layout options
-  $demoSettings.append(
-    '<h4 class="control-sidebar-heading">'
-    + 'Layout Options'
-    + '</h4>'
-	  
-	  
-    // Fixed layout
-	+ '<div class="flexbox mb-10">'
-	+ '<label for="layout_fixed" class="control-sidebar-subheading">'
-    + 'Fixed layout'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-layout="fixed" id="layout_fixed">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'	
-	  
-    // Boxed layout
-	+ '<div class="flexbox mb-10">'
-	+ '<label for="layout_boxed" class="control-sidebar-subheading">'
-    + 'Boxed Layout'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-layout="layout-boxed" id="layout_boxed">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'
-	  
-    // Sidebar Toggle
-	+ '<div class="flexbox mb-10">'
-	+ '<label for="toggle_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Sidebar'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-layout="sidebar-collapse" id="toggle_sidebar">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'	  
-    
-    // Control Sidebar Toggle
-	+ '<div class="flexbox mb-10">'
-	+ '<label for="toggle_right_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Right Sidebar Slide'
-    + '</label>'
-	+ '<label class="switch switch-border switch-danger">'
-	+ '<input type="checkbox" data-controlsidebar="control-sidebar-open" id="toggle_right_sidebar">'
-	+ '<span class="switch-indicator"></span>'
-	+ '<span class="switch-description"></span>'
-	+ '</label>'
-	+ '</div>'	  
-	
-  )
-  
-  
-
-  $tabPane.append($demoSettings)
-  $('#control-sidebar-home-tab').after($tabPane)
-
-  setup()
-
-  $('[data-toggle="tooltip"]').tooltip()
-});// End of use strict
-
-$(function () {
-  'use strict'
-	
-	$('.theme-switch li a').click(function () {
-		$('.theme-switch li a').removeClass('active').addClass('inactive');
-		$(this).toggleClass('active inactive');
+	jQuery(document).on('click', '.dlab_theme_demo_rtl', function(){
+		var demoTheme = jQuery(this).data('theme');
+		themeChange(demoTheme, 'rtl');
 	});
 	
-});// End of use strict
-
-
-$(function () {
-  'use strict'	
- 	$('.bg-size').on('change',function(){
-		var $this = $(this),
-		width_val = this.value,
-		wrapper = $('body');
-
-		if(width_val === 'wave'){
-			$(wrapper).removeClass('onlyheader').addClass('onlywave');
+	
+	jQuery(window).on('load', function(){
+		setTimeout(() => {
+			var allAttrs = getElementAttrs(document.querySelector('body'));
+			allAttrs.forEach(handleSetThemeOption);
+		},1500); 
+		//direction = (direction != undefined)?direction:'ltr';
+		if(theme != undefined){
+			themeChange(theme);
+		}else if(getCookie('version') == ''){	
+				themeChange(0);
+			
 		}
-		else if(width_val === 'header'){
-			$(wrapper).removeClass('onlywave').addClass('onlyheader');
-		}
-		else{
-			$(wrapper).removeClass('onlywave onlyheader');
-		}
+		
+		/* Set Theme On Page From Cookie */
+		setThemeOptionOnPage();
 	});
-});// End of use strict
+	
+
+})(jQuery);

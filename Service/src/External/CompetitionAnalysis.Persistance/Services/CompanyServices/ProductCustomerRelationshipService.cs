@@ -51,28 +51,28 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
             _queryRepository.SetDbContextInstance(_context);
-            var result = await _queryRepository.GetAll().Include("Product").Include("Customer").Include("Category").Include("Brand").ToListAsync();
+            var result = await _queryRepository.GetAll().Include("Customer").Include("Category").Include("Brand").ToListAsync();
             List<ProductCustomerRelationshipDto> dto = new();
             foreach (var item in result)
             {
                 dto.Add(new ProductCustomerRelationshipDto()
                 {
-                    CategoryName = item.Category.CategoryName,
-                    CategoryId = item.Category.Id,
-                    BrandId = item.Brand.Id,
-                    BrandName = item.Brand.BrandName,
-                    CustomerName = item.Customer.Name,
-                    CustomerId = item.Customer.Id,
-                    ProductId = item.Product.Id,
-                    ProductName = item.Product.Name,
-                    ProductPrice = item.Product.Price,
-                    Price = item.Price,
+                    CategoryName = item.Category?.CategoryName,
+                    CategoryId = item.Category?.Id,
+                    BrandId = item.Brand?.Id,
+                    BrandName = item.Brand?.BrandName,
+                    CustomerName = item.Customer?.Name,
+                    CustomerId = item.Customer?.Id,
+                    //ProductId = item.Product?.Id,
+                    //ProductName = item.Product?.Name,
+                   // ProductPrice = item.Product?.Price,
+                    //Price = item.Price,
                     CreatedDate = item.CreatedDate,
                     Explanation = item.Explanation,
-                    Specieses = EnumHelper.GetDisplayName(item.Specieses)
-                   
+                    Specieses = item.Specieses != null ? EnumHelper.GetDisplayName(item.Specieses) : null
                 });
             }
+
             return dto;
         }
         public Task<ProductCustomerRelationshipses> GetByIdAsync(string id, string companyId)

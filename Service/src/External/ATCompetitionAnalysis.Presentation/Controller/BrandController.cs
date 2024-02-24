@@ -24,9 +24,8 @@ namespace ATCompetitionAnalysis.Presentation.Controller
             CreateBrandCommandResponse response = await _mediator.Send(requst, cancellationToken);
             return Ok(response);
         }
-        [HttpGet("[action]")]
-
-        public async Task<IActionResult> GetAllCustomer(string companyid)
+        [HttpGet("[action]/{companyid}")]
+        public async Task<IActionResult> GetAllBrand(string companyid)
         {
             GetAllBrandQuery request = new(companyid);
             GetAllBrandQueryResponse response = await _mediator.Send(request);

@@ -6,14 +6,7 @@ using CompetitionAnalysis.Domain.CompanyEntities;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.BrandRepositories;
 using CompetitionAnalysis.Domain.UnitOfWorks;
 using CompetitionAnalysis.Persistance.Context;
-using CompetitionAnalysis.Persistance.Migrations.CompanyDb;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace CompetitionAnalysis.Persistance.Services.CompanyServices
 {
     public sealed class BrandService : IBrandService
@@ -25,7 +18,6 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         private readonly IMapper _mapper;
         private readonly ICompanyDbUnitOfWork _companyDbUnitOfWork;
         private CompanyDbContext _context;
-
         public BrandService(IBrandCommandRepository baranCommandRepository, IBrandQueryRepository brandQueryRepository, IContextService contextService, IMapper mapper, ICompanyDbUnitOfWork companyDbUnitOfWork)
         {
             _brandCommandRepository = baranCommandRepository;
@@ -34,7 +26,6 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _mapper = mapper;
             _companyDbUnitOfWork = companyDbUnitOfWork;
         }
-
         public async Task<Brand> CreateBrandAsync(CreateBrandCommand request, CancellationToken cancellationToken)
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(request.companyId);

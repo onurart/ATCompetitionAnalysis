@@ -211,12 +211,6 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Specieses")
                         .HasColumnType("int");
 
@@ -230,8 +224,6 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductCustomerRelationship", (string)null);
                 });
@@ -250,17 +242,11 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

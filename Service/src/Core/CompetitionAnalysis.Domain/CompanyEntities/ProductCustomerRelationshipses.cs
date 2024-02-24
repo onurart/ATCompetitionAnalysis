@@ -11,25 +11,31 @@ namespace CompetitionAnalysis.Domain.CompanyEntities
 {
     public sealed class ProductCustomerRelationshipses : Entity
     {
-        public decimal Price { get; set; }
-        [ForeignKey(nameof(ProductId))]
-        public string? ProductId { get; set; }
-        public Product Product { get; set; }
+        //public decimal Price { get; set; }
+        //[ForeignKey(nameof(ProductId))]
+        //public string? ProductId { get; set; }
+        //public Product Product { get; set; }
+
 
         [ForeignKey(nameof(CustomerId))]
         public string? CustomerId { get; set; }
         public Customer Customer { get; set; }
-
-        [ForeignKey(nameof(CategoryId))]
-        public string? CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Specieses Specieses { get; set; }
 
 
         [ForeignKey(nameof(BrandId))]
         public string? BrandId { get; set; }
         public Brand Brand { get; set; }
 
-        public Specieses Specieses { get; set; }
+
+
+
+        [ForeignKey(nameof(CategoryId))]
+        public string? CategoryId { get; set; }
+        public Category Category { get; set; }
+
+
+
 
         public string? Explanation { get; set; }
     }

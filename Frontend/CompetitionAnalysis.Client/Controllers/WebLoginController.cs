@@ -62,7 +62,7 @@ namespace CompetitionAnalysis.Client.Controllers
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps); await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
                         if (tokenModel.MainRole == "ADMIN")
                         {
-                            return RedirectToAction("Admin", "Admin");
+                            return RedirectToAction("Index", "Admin/Admin");
                         }
                         else
                         {

@@ -1,12 +1,5 @@
-﻿using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Queries.GetAllCustomer;
-using CompetitionAnalysis.Application.Messaging;
+﻿using CompetitionAnalysis.Application.Messaging;
 using CompetitionAnalysis.Application.Services.CompanyServices;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.Queries.GetAllBrand
 {
