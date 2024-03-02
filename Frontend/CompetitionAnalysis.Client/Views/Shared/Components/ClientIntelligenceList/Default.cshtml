@@ -1,0 +1,77 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.GetAllProductCustomerRelationship
+@model List<GetProductCustomerRelationship>
+
+<div class="module so-extraslider-ltr extra-layout4 cus1">
+    <div class="form-group col-pre">
+        <div class="m-head">İSTİHBARAT LİSTESİ<a href="#">Tümü</a></div>
+    </div>
+    <div class="modcontent">
+        <div class="so-extraslider">
+            <div class="yt-content-slider extraslider-inner products-list" data-rtl="yes" data-pagination="no" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column0="6" data-items_column1="3" data-items_column2="2" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-lazyload="yes" data-loop="no" data-buttonpage="top">
+
+                @foreach (var item in Model)
+                {
+
+                    <div class="item ">
+                        <div class="product-layout product-grid2 style1">
+                            <div class="product-thumb transition product-item-container">
+                                <div class="left-block">
+                                    <div class="product-~/Client/image-container">
+                                        <div class="~/Client/image">
+                                            <div class="box-label">
+                                                <span class="label label-sale"></span>
+                                            </div>
+                                            <a href="#" target="_self" title="product">
+                                                <img src="/adminfoto/bran/@item.ImageUrl" width="198" height="198" alt="Ground round enim" class="img-responsive">
+                                            </a>
+
+                                        </div>
+                                        <!--quickview-->
+                                        <div class="so-quickview">
+                                            <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>
+                                        <!--end quickview-->
+                                    </div>
+                                </div>
+                                <div class="right-block">
+                                    <div class="caption">
+                                        <h4><a href="#" target="_self" title="Ground round enim">@item.CustomerName</a></h4>
+                                        <div class="rating">
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        </div>
+
+
+                                        <p class="price">
+                                            <span class="price-new">@item.CurrencyTl</span>
+                                            <span class="price-new">@item.RakipTl</span>
+                                        </p>
+                                        <div class="button-group">
+                                            <button class="addToCart" title="Add to Cart" type="button" onclick="cart.add('69');">
+                                                <i class="fa fa-shopping-cart"></i>  <span>Add to Cart</span>
+                                            </button>
+                                            <button class="btn-button wishlist" type="button" title="Add to Wish List" onclick="wishlist.add('69');">
+                                                <i class="fa fa-heart"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button class="btn-button compare" type="button" title="Compare this Product" onclick="compare.add('69');">
+                                                <i class="fa fa-refresh"></i><span>Compare this Product</span>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

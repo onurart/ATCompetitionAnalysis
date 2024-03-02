@@ -1,0 +1,43 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Product.Model
+@model CreateProductModel
+@{
+    ViewData["Title"] = "ProductCreate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="post" asp-controller="Product" asp-action="ProductCreate" class="my-3">
+
+                                        <div class="form-group">
+                                            <label asp-for="Name"></label>
+                                            <input asp-for="Name" name="Name" class="form-control" placeholder="Ürün adı giriniz">
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Price"></label>
+                                            <input asp-for="Price" name="Price" class="form-control" placeholder="Fiyat giriniz">
+                                            <span asp-validation-for="Price" class="text-danger"></span>
+                                        </div>
+                                        <br />
+                                        <button type="submit" class="btn btn-primary">Oluştur</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

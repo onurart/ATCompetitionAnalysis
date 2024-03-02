@@ -2,6 +2,8 @@
 using CompetitionAnalysis.Core.Services.CompanyService;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 namespace CompetitionAnalysis.Core.Repositories.CompanyRepositories
@@ -15,7 +17,7 @@ namespace CompetitionAnalysis.Core.Repositories.CompanyRepositories
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
         }
-        public async Task<List<GetProductCustomerRelationship>> GetAlGetProductCustomerRelationshipAsync(string companyId)
+        public async Task<List<GetProductCustomerRelationship>> GetAlGetProductCustomerRelationshipAsync(string companyId, string token)
         {
 
             try
@@ -23,6 +25,8 @@ namespace CompetitionAnalysis.Core.Repositories.CompanyRepositories
                 var httpClient = _httpClientFactory.CreateClient();
                 var apiSettings = _configuration.GetSection("ApiSettings");
                 var baseUrl = apiSettings["BaseUrl"];
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
                 var apiUrl = $"{baseUrl}/Product/GetProductCustomerRelationshipDto/{companyId}";
                 var response = await httpClient.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode)

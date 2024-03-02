@@ -1,20 +1,25 @@
 ﻿using CompetitionAnalysis.Application.Messaging;
 using CompetitionAnalysis.Application.Services.CompanyServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.Queries.GetAllBrand
 {
-    public class GetAllQueryHandler : IQueryHandler<GetAllBrandQuery, GetAllBrandQueryResponse>
+    public sealed class GetAllBrandQueryHandler : IQueryHandler<GetAllBrandQuery ,GetAllBrandQueryResponse>
     {
         private readonly IBrandService _brandService;
 
-        public GetAllQueryHandler(IBrandService brandService)
+        public GetAllBrandQueryHandler(IBrandService brandService)
         {
             _brandService = brandService;
         }
 
         public async Task<GetAllBrandQueryResponse> Handle(GetAllBrandQuery request, CancellationToken cancellationToken)
         {
-            return new(await _brandService.GetAllAsync(request.CompanyId));
+            return new(await _brandService.GetAllBrandsAsync(request.CompanyId));   
         }
     }
-    }
+}

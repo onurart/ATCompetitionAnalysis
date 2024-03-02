@@ -1,5 +1,6 @@
 ﻿using CompetitionAnalysis.Domain.CompanyEntities;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.BrandRepositories;
+using CompetitionAnalysis.Persistance.Repositories.GenericRepositories.CompanyDbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;

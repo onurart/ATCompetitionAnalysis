@@ -1,12 +1,10 @@
 using CompetitionAnalysis.Client.Models;
-using CompetitionAnalysis.Core.Features.CompanyFeatures.GetAllProductCustomerRelationship;
 using CompetitionAnalysis.Core.Services.CompanyService;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace CompetitionAnalysis.Client.Controllers
 {
@@ -24,7 +22,8 @@ namespace CompetitionAnalysis.Client.Controllers
         public async Task<object> GetAlGetProductCustomerRelationship(DataSourceLoadOptions loadOptions)
         {
             string companyId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "CompanyId")?.Value;
-            var prp = await _productCustomerRelationshipGet.GetAlGetProductCustomerRelationshipAsync(companyId);
+            var token = User.Claims.FirstOrDefault(x => x.Type == "token")?.Value;
+            var prp = await _productCustomerRelationshipGet.GetAlGetProductCustomerRelationshipAsync(companyId, token);
             return DataSourceLoader.Load(prp, loadOptions);
         }
         public async Task<IActionResult> Index()

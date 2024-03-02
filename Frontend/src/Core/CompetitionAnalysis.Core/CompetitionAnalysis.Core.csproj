@@ -11,5 +11,9 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\CompanyFeatures\Campanign\Commands\" />
+    <Folder Include="Features\CompanyFeatures\GetAllProductCustomerRelationship\Query\" />
+  </ItemGroup>
 
 </Project>

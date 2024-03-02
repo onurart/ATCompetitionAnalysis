@@ -1,0 +1,12 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Categoies.Model
+    @model List<CategoryModel>
+<div class="mb-3 col-md-6">
+    <label class="form-label">Category Seç <span class="text-danger">*</span></label>
+    <select class="default-select wide form-control" name="CategoryId" required="required">
+        <option value="">Category Seç </option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.CategoryName</option>
+        }
+    </select>
+</div>

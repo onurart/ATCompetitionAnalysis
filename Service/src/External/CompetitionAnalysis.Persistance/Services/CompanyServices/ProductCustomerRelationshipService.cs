@@ -19,7 +19,6 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         private readonly ICompanyDbUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private CompanyDbContext _context;
-
         public ProductCustomerRelationshipService(IProductCustomerRelationshipCommandRepository commandRepository, IProductCustomerRelationshipQueryRepository queryRepository, IContextService contextService, ICompanyDbUnitOfWork unitOfWork, IMapper mapper)
         {
             _commandRepository = commandRepository;
@@ -29,7 +28,6 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
             _mapper = mapper;
 
         }
-
         public async Task<ProductCustomerRelationshipses> CreateProductCustomerRelationshipAsync(CreateProductCustomerRelationshipCommand request, CancellationToken cancellationToken)
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(request.CompanyId);
@@ -51,25 +49,35 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         {
             _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
             _queryRepository.SetDbContextInstance(_context);
-            var result = await _queryRepository.GetAll().Include("Customer").Include("Category").Include("Brand").ToListAsync();
+            var result = await _queryRepository.GetAll().Include("Customer").Include("Product").Include("Category").Include("Brand").ToListAsync();
             List<ProductCustomerRelationshipDto> dto = new();
             foreach (var item in result)
             {
                 dto.Add(new ProductCustomerRelationshipDto()
                 {
-                    CategoryName = item.Category?.CategoryName,
-                    CategoryId = item.Category?.Id,
                     BrandId = item.Brand?.Id,
-                    BrandName = item.Brand?.BrandName,
-                    CustomerName = item.Customer?.Name,
+                    CategoryId = item.Category?.Id,
                     CustomerId = item.Customer?.Id,
-                    //ProductId = item.Product?.Id,
-                    //ProductName = item.Product?.Name,
-                   // ProductPrice = item.Product?.Price,
-                    //Price = item.Price,
+                    ProductId = item.Product?.Id,
+
+                    CategoryName = item.Category?.CategoryName,
+                    CustomerName = item.Customer?.Name,
+                    BrandName = item.Brand?.BrandName,
+
+
+                    ProductName = item.Product?.Name,
+                    ProductPrice = Convert.ToDecimal(item.Product?.Price),
                     CreatedDate = item.CreatedDate,
                     Explanation = item.Explanation,
-                    Specieses = item.Specieses != null ? EnumHelper.GetDisplayName(item.Specieses) : null
+                    Specieses = item.Specieses != null ? EnumHelper.GetDisplayName(item.Specieses) : null,
+                    RakipTl = item.RakipTl,
+                    RakipEuro = item.RakipEuro,
+                    RakipDolor = item.RakipDolor,
+                    ImageUrl = item.ImageUrl,
+                    CurrencyTl = item.CurrencyTl,
+                    CurrencyEuro = item.CurrencyEuro,
+                    CurrencyDolor = item.CurrencyDolor
+
                 });
             }
 

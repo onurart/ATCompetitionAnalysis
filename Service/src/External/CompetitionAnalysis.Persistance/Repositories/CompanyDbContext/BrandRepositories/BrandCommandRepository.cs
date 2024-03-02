@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetitionAnalysis.Persistance.Repositories.CompanyDbContext.BrandRepositories
 {
-    public class BrandCommandRepository :CompanyDbCommandRepository<Brand>, IBrandCommandRepository
+    public class BrandCommandRepository : CompanyDbCommandRepository<Brand>, IBrandCommandRepository
     {
     }
 }

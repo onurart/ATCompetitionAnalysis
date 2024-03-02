@@ -2,12 +2,10 @@
 using CompetitionAnalysis.Application.Features.AppFeatures.CompanyFeatures.Commands.CreateCompany;
 using CompetitionAnalysis.Application.Features.AppFeatures.RoleFeatures.Commands.CreateRole;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.Commands.CreateBrand;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.Queries.GetAllBrand;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.Campaign.Commands.CreateCampaign;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CategoryFeatures.Commands.CreateCustomer;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.CategoryFeatures.Queries.GetAllCategory;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomer;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerAll;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.CustomerFeatures.Commands.CreateCustomerCompany;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Commands.CreateProductCustomerRelationship;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries.GetAllProductCustomerRelationship;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProduct;
@@ -22,22 +20,26 @@ namespace CompetitionAnalysis.Persistance.Mapping
     {
         public MappingProfile()
         {
+            CreateMap<CreateProductCommand, Product>();
+            CreateMap<CreateProductCompanyCommand, List<Product>>();
+
+            CreateMap<CreateBrandCommand, Brand>();
+            CreateMap<CreateCampaignCommand, Campaign>();
+
+
+
             CreateMap<CreateCompanyCommand, Company>();
             CreateMap<CreateRoleCommand, AppRole>();
-            CreateMap<CreateProductCommand, Product>();
             CreateMap<CreateCustomerCommand, Customer>();
             CreateMap<CreateCategoryCommand, Category>();
-            CreateMap<CreateBrandCommand, Brand>();
             CreateMap<CreateProductCustomerRelationshipCommand, ProductCustomerRelationshipses>();
+            CreateMap<CreateProductAllCommand, List<Product>>();
+            CreateMap<CreateCustomerAllCommand, List<Customer>>();
 
 
 
             CreateMap<GetAllProductCustomerRelationshipQuery, ProductCustomerRelationshipses>();
-            CreateMap<CreateCustomerAllCommand, List<Customer>>();
-            CreateMap<CreateProductAllCommand, List<Product>>();
-            CreateMap<GetAllBrandQuery, List<Brand>>();
-            CreateMap<GetAllCategoryQuery, Category>();
-            CreateMap<CreateProductCompanyCommand, List<Product>>();
+            //CreateMap<GetAllCategoryQuery, Category>();
 
 
         

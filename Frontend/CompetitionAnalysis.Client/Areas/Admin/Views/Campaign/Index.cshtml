@@ -1,0 +1,118 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Campanign.Model
+@using DevExtreme.AspNet.Mvc
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="/Admin/Admin">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Marka Listesi</a></li>
+            </ol>
+        </div>
+        @* <div class="">
+            <a href="/Admin/CreateBrand"
+                <button type="button" class="btn btn-danger w-20">
+                    Marka Ekle <span class="btn-icon-end"><i class="fa fa-plus"></i></span>
+                </button></a>
+        </div> *@
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+
+                            @(
+                                Html.DevExtreme().DataGrid<CampaingModel>()
+                                .DataSource(d => d.Mvc()
+                                .Controller("Admin")
+                                .LoadAction("CampanigGridList")
+                                .Key("Id"))
+                                .ID("Id")
+                                .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
+                                .ColumnMinWidth(100)
+                                .ColumnAutoWidth(true)
+                                .ShowColumnLines(false)
+                                .ShowRowLines(true)
+                                .RowAlternationEnabled(true)
+                                .ShowBorders(false)
+                                .Paging(paging => paging.PageSize(20))
+                                @* .Editing(e => e.Mode(GridEditMode.Popup)
+                            .AllowUpdating(true)
+                            .AllowAdding(true)
+                            .AllowDeleting(true)
+                            .Popup(p => p
+                            .Title("KATEGORİ EKLE")
+                            .ShowTitle(true)
+                            .Width(600)
+                            .Height(255)
+                            )
+                            .Form(f => f.Items(items =>
+                            {
+                            items.AddGroup()
+                            .ColCount(2)
+                            .ColSpan(2)
+                            .Items(groupItems =>
+                            {
+                            groupItems.AddSimpleFor(m => m.CategoryName).Editor(x => x.TextBox().Width(400)
+                            );
+                            });
+                            }))
+                            ) *@
+                                .Pager(pager =>
+                                {
+                                    pager.Visible(true);
+                                    pager.DisplayMode(GridPagerDisplayMode.Full);
+                                    pager.ShowPageSizeSelector(true);
+                                    pager.AllowedPageSizes(new JS("[5, 10, 30, 70, 120,'all']"));
+                                    pager.ShowInfo(true);
+                                    pager.ShowNavigationButtons(true);
+                                })
+                                .Columns(columns =>
+                                {
+                                    @*  columns.Add().Caption("İŞLEM").CssClass("btnx btn-infox btn-smx")
+                            .CellTemplate(@<text>
+                            <input type="button" class="btnx btn-infox btn-smx" onclick="location.href='@Url.Action("", "")/<%= data.Id %>';" value="Detay" />
+                            </text>);
+                            *@
+                                    columns.Add().DataField("ImageUrl").Caption("RAKİP LOGO")
+                                                    .Width(110)
+                                                    .CellTemplate(@<text>
+                                <div>
+                                    <img src="~/favicon-32x32.png" alt="" />
+                                </div>
+                            </text>);
+
+                                    columns.AddFor(m => m.Name).Caption("KAMPANYA ADI").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.Price).Caption("FİYAT ADI").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.StartDate).Caption("BAŞLANGİÇ TARİHİ").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.EndDate).Caption("BİTME TARİHİ").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.CustomerName).Caption("RAKİP ADI").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.ProductName).Caption("ÜRÜN ADI").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.CategoryName).Caption("KATEGORİ ADI").CssClass("text-left text-uppercase");
+                                    columns.AddFor(m => m.BrandName).Caption("MARKA ADI").CssClass("text-left text-uppercase");
+                                })
+                                .FilterRow(f => f.Visible(true))
+                                .HeaderFilter(f => f.Visible(true))
+                                .Height(750)
+                                .FocusedRowEnabled(true)
+                                .FocusedRowKey(1)
+                                .ElementAttr("class", "")
+                                .Grouping(g => g.AutoExpandAll(false))
+                                )
+                                
+                              
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

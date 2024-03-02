@@ -1,21 +1,13 @@
-﻿using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProduct;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductAll;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductCompany;
+﻿using AutoMapper;
+using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProduct;
 using CompetitionAnalysis.Application.Services.CompanyServices;
+using CompetitionAnalysis.Domain;
 using CompetitionAnalysis.Domain.CompanyEntities;
 using CompetitionAnalysis.Domain.Repositories.AppDbContext.CompanyRepositories;
 using CompetitionAnalysis.Domain.Repositories.CompanyDbContext.ProductRepositories;
 using CompetitionAnalysis.Domain.UnitOfWorks;
-using CompetitionAnalysis.Domain;
 using CompetitionAnalysis.Persistance.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 
 namespace CompetitionAnalysis.Persistance.Services.CompanyServices
 {
@@ -26,18 +18,15 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         private readonly IContextService _contextService;
         private readonly ICompanyDbUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ICompanyQueryRepository _companyQueryRepository;
-        private readonly IHttpClientFactory _httpClientFactory;
+
         private CompanyDbContext _context;
-        public ProductService(IProductCommandRepository commandRepository, IProductQueryRepository queryRepository, IContextService contextService, ICompanyDbUnitOfWork unitOfWork, IMapper mapper, ICompanyQueryRepository companyQueryRepository, IHttpClientFactory httpClientFactory)
+        public ProductService(IProductCommandRepository commandRepository, IProductQueryRepository queryRepository, IContextService contextService, ICompanyDbUnitOfWork unitOfWork, IMapper mapper)
         {
             _commandRepository = commandRepository;
             _queryRepository = queryRepository;
             _contextService = contextService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _companyQueryRepository = companyQueryRepository;
-            _httpClientFactory = httpClientFactory;
         }
         public async Task<Product> CreateProductAsync(CreateProductCommand request, CancellationToken cancellationToken)
         {
@@ -58,7 +47,14 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         }
 
 
-
+        public async Task UpdateAsync(Product product, string companyId)
+        {
+            _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
+            _commandRepository.SetDbContextInstance(_context);
+            _unitOfWork.SetDbContextInstance(_context);
+            _commandRepository.Update(product);
+            await _unitOfWork.SaveChangesAsync();
+        }
 
 
 
@@ -114,14 +110,7 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         //    await _unitOfWork.SaveChangesAsync();
         //    return product;
         //}
-        //public async Task UpdateAsync(Product product, string companyId)
-        //{
-        //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);
-        //    _commandRepository.SetDbContextInstance(_context);
-        //    _unitOfWork.SetDbContextInstance(_context);
-        //    _commandRepository.Update(product);
-        //    await _unitOfWork.SaveChangesAsync();
-        //}
+
         //public async Task<Product> UpdateProductIsActiveAsync(string id, string companyId, bool isActive)
         //{
         //    _context = (CompanyDbContext)_contextService.CreateDbContextInstance(companyId);

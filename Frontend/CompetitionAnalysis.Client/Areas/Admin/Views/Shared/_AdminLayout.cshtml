@@ -4,14 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
-	
-	
 	<link href="~/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 	<link href="~/css/style.css" rel="stylesheet">
-    
-	
-	<link href="~/css/devextreme/dx.light.compact.css" rel="stylesheet" />
-    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.compact.css" rel="stylesheet" />
+    <link href="~/dx.generic.custom-scheme.css" rel="stylesheet" />
     <script src="~/js/devextreme/jquery.js"></script>
     <script src="~/js/devextreme/bootstrap.js"></script>
     <script src="~/js/devextreme/jquery.min.js"></script>
@@ -92,7 +88,7 @@
 		<!--**********************************
 			Chat box start
 		***********************************-->
-		<div class="chatbox">
+@* 		<div class="chatbox">
 			<div class="chatbox-close"></div>
 			<div class="custom-tab-1">
 				<ul class="nav nav-tabs">
@@ -584,9 +580,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
 			</div>
-		</div>
+		</div> *@
 		<!--**********************************
 			Chat box End
 		***********************************-->
@@ -599,7 +595,6 @@
 					<div class="collapse navbar-collapse justify-content-between">
 						<div class="header-left">
 							<div class="dashboard_bar">
-								Dashboard 6
 							</div>
 						</div>
 						<ul class="navbar-nav header-right">
@@ -691,7 +686,7 @@
 											<li>
 												<div class="timeline-panel">
 													<div class="media me-2">
-														<img alt="image" width="50" src="images/avatar/1.jpg">
+														<img alt="image" width="50" src="~/images/avatar/1.jpg">
 													</div>
 													<div class="media-body">
 														<h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -724,7 +719,7 @@
 											<li>
 												<div class="timeline-panel">
 													<div class="media me-2">
-														<img alt="image" width="50" src="images/avatar/1.jpg">
+														<img alt="image" width="50" src="~/images/avatar/1.jpg">
 													</div>
 													<div class="media-body">
 														<h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -759,14 +754,14 @@
 									<a class="all-notification text-primary" href="javascript:void(0);">See all notifications <i class="ti-arrow-right"></i></a>
 								</div>
 							</li>
-							<li class="nav-item dropdown notification_dropdown">
+							@* <li class="nav-item dropdown notification_dropdown">
 								<a class="nav-link bell bell-link" href="javascript:void(0);">
 									<svg width="28" height="28" viewbox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" clip-rule="evenodd" d="M27 7.88883C27 5.18897 24.6717 3 21.8 3C17.4723 3 10.5277 3 6.2 3C3.3283 3 1 5.18897 1 7.88883V23.7776C1 24.2726 1.31721 24.7174 1.80211 24.9069C2.28831 25.0963 2.8473 24.9912 3.2191 24.6417C3.2191 24.6417 5.74629 22.2657 7.27769 20.8272C7.76519 20.3688 8.42561 20.1109 9.11591 20.1109H21.8C24.6717 20.1109 27 17.922 27 15.2221V7.88883ZM24.4 7.88883C24.4 6.53951 23.2365 5.44441 21.8 5.44441C17.4723 5.44441 10.5277 5.44441 6.2 5.44441C4.7648 5.44441 3.6 6.53951 3.6 7.88883V20.8272L5.4382 19.0989C6.4132 18.1823 7.73661 17.6665 9.11591 17.6665H21.8C23.2365 17.6665 24.4 16.5726 24.4 15.2221V7.88883ZM7.5 15.2221H17.9C18.6176 15.2221 19.2 14.6745 19.2 13.9999C19.2 13.3252 18.6176 12.7777 17.9 12.7777H7.5C6.7824 12.7777 6.2 13.3252 6.2 13.9999C6.2 14.6745 6.7824 15.2221 7.5 15.2221ZM7.5 10.3333H20.5C21.2176 10.3333 21.8 9.7857 21.8 9.11104C21.8 8.43638 21.2176 7.88883 20.5 7.88883H7.5C6.7824 7.88883 6.2 8.43638 6.2 9.11104C6.2 9.7857 6.7824 10.3333 7.5 10.3333Z" fill="#4f7086"></path>
 									</svg>
 									<span class="badge light text-white bg-primary rounded-circle">5</span>
 								</a>
-							</li>
+							</li> *@
 							<li class="nav-item">
 								<a href="javascript:void(0);" class="btn btn-primary d-sm-inline-block d-none">Generate Report<i class="las la-signal ms-3 scale5"></i></a>
 							</li>
@@ -817,12 +812,12 @@
 		Scripts
 	***********************************-->
 	<!-- Required vendors -->
-	<script src="~/vendor/global/global.min.js"></script>
-	<script src="~/vendor/chart-js/chart.bundle.min.js"></script>
-	<script src="~/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-	<!-- Apex Chart -->
-	<script src="~/vendor/apexchart/apexchart.js"></script>
 
+	<script src="~/vendor/global/global.min.js"></script>
+	@* <script src="~/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script> *@
+	<!-- Apex Chart -->
+@* 	<script src="~/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="~/js/plugins-init/datatables.init.js"></script> *@
 	<!-- Chart piety plugin files -->
 	<script src="~/vendor/peity/jquery.peity.min.js"></script>
 	<!-- Dashboard 1 -->

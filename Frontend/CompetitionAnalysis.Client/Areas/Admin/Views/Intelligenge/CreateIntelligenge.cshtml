@@ -1,0 +1,344 @@
+﻿@using CompetitionAnalysis.Core.Enums
+@using CompetitionAnalysis.Core.Features.CompanyFeatures.GetAllProductCustomerRelationship.Commands
+
+@{
+    ViewData["Title"] = "CreateIntelligenge";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Home/Index">Ana Sayfa</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">İSTİHBARAT OLUŞTURMA</a></li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form class="needs-validation" method="post" asp-action="CreateIntelligenge" asp-controller="Admin">
+                                <div class="row">
+                                    @await Component.InvokeAsync("FromCustomer")
+                                    @await Component.InvokeAsync("FromBrand")
+                                    @await Component.InvokeAsync("FromCategory")
+                                    @await Component.InvokeAsync("FromProduct")
+
+
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">İşlem Türü <span class="text-danger">*</span></label>
+                                        <select class="default-select wide form-control" name="Specieses" required="required">
+                                            <option value="">Tür Durumu Seç </option>
+                                            @foreach (var value in Enum.GetValues(typeof(Specieses)))
+                                            {
+                                                <option value="@((int)value)">@value.ToString()</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <div class="col-md-3">
+                                            <select class="default-select wide form-control" name="currencyId" id="currencySelect" required="required">
+                                                <option value="">Para Birimi Seç</option>
+                                                <option value="tl">TL</option>
+                                                <option value="dolor">Dolor</option>
+                                                <option value="euro">Euro</option>
+                                            </select>
+                                            <br />
+                                            <input name="CurrencyTl" id="currencyTl" placeholder="Motor Asin Fiyat TL Para Birimi  ₺" class="form-control" style="display: none;" />
+                                            <input name="CurrencyDolar" id="currencyDolor" placeholder="Motor Asin Fiyat Dolor Para Birimi $" class="form-control" style="display: none;" />
+                                            <input name="CurrencyEuro" id="currencyEuro" class="form-control" placeholder="Motor Asin Fiyat Euro  para birimi €" style="display: none;" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <select class="default-select wide form-control" name="currencyId" id="currencySelectRakip" required="required">
+                                                <option value="">Para Birimi Seç</option>
+                                                <option value="tl">TL</option>
+                                                <option value="dolor">Dolor</option>
+                                                <option value="euro">Euro</option>
+                                            </select>
+                                            <br />
+                                            <input name="RakipTl" id="rakipTl" placeholder="Rakip TL Para Birimi ₺" class="form-control" style="display: none;" />
+                                            <input name="RakipDolor" id="rakipDolor" placeholder="Rakip  Dolor Para Birimi $" class="form-control" style="display: none;" />
+                                            <input name="RakipEuro" id="rakipEuro" class="form-control" placeholder="Rakip  Euro para birimi €" style="display: none;" />
+                                        </div>
+                                    </div>
+                                    <input type="file" name="ImageUrl" id="imageFile" onchange="uploadImage(this)">
+
+
+                                    <div class="mb-3 col-md-6">
+                                        <div class="card">
+                                            <label class="form-label">Açıklama <span class="text-danger">*</span></label>
+                                            <textarea class="form-control" rows="7" name="Explanation" id="comment"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 col-md-2">
+                                    </div>
+
+
+
+                                </div>
+
+                                <br />
+                                <br />
+                                <button type="submit" class="btn btn-primary">İSTİHBARAT  OLUŞTUR</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function uploadImage(input) {
+        var formData = new FormData();
+        var file = input.files[0];
+        var originalFileName = file.name; // Orijinal dosya adını sakla
+
+        // Dosya adını güvenli hale getir
+        var safeFileName = makeFileNameSafe(originalFileName);
+
+        formData.append('imageFile', file, safeFileName);
+
+        // AJAX isteği oluştur
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Admin/UploadImage', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Dosya yüklendikten sonra ek işlemleri buraya ekleyebilirsiniz.
+                // Örneğin, dosyanın yüklendiği yerde bir görüntü önizleme gösterebilirsiniz.
+            } else {
+                // Hata durumunda gerekli işlemleri gerçekleştir
+            }
+        };
+        xhr.send(formData);
+    }
+
+    // Dosya adında bulunan boşlukları, özel karakterleri ve Türkçe karakterleri kaldıran fonksiyon
+    function makeFileNameSafe(fileName) {
+        var safeFileName = fileName.replace(/[^\w\d\.-]/g, ''); // Özel karakterleri kaldır
+        return safeFileName;
+    }
+</script>
+
+
+<script>
+    // Jquery Dependency
+    $(document).ready(function () {
+        // Select element
+        var currencySelect = $('#currencySelect');
+
+        // Input elements
+        var currencyTl = $('#currencyTl');
+        var currencyDolor = $('#currencyDolor');
+        var currencyEuro = $('#currencyEuro');
+
+        // Event listener for select element
+        currencySelect.on('change', function () {
+            // Hide all input fields
+            currencyTl.hide();
+            currencyDolor.hide();
+            currencyEuro.hide();
+
+            // Show the selected currency input field
+            var selectedCurrency = $(this).val();
+            if (selectedCurrency === 'tl') {
+                currencyTl.show();
+            } else if (selectedCurrency === 'dolor') {
+                currencyDolor.show();
+            } else if (selectedCurrency === 'euro') {
+                currencyEuro.show();
+            }
+        });
+
+        // Format input values to currency format
+        $("input[name^='Currency']").on({
+            keyup: function () {
+                formatCurrency($(this));
+            },
+            blur: function () {
+                formatCurrency($(this), "blur");
+            }
+        });
+
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function formatCurrency(input, blur) {
+            // Get input value
+            var input_val = input.val();
+
+            // Don't validate empty input
+            if (input_val === "") { return; }
+
+            // Original length
+            var original_len = input_val.length;
+
+            // Initial caret position
+            var caret_pos = input.prop("selectionStart");
+
+            // Check for decimal
+            if (input_val.indexOf(".") >= 0) {
+
+                // Get position of first decimal
+                var decimal_pos = input_val.indexOf(".");
+
+                // Split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                // Add commas to left side of number
+                left_side = formatNumber(left_side);
+
+                // Validate right side
+                right_side = formatNumber(right_side);
+
+                // On blur make sure 2 numbers after decimal
+                if (blur === "blur") {
+                    right_side += "00";
+                }
+
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
+
+                // Join number by .
+                input_val = left_side + "." + right_side;
+
+            } else {
+                // No decimal entered
+                // Add commas to number
+                // Remove all non-digits
+                input_val = formatNumber(input_val);
+
+                // Final formatting
+                if (blur === "blur") {
+                    input_val += ".00";
+                }
+            }
+
+            // Send updated string to input
+            input.val(input_val);
+
+            // Put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+    });
+</script>
+<script>
+    // Jquery Dependency
+    $(document).ready(function () {
+        // Select element
+        var currencySelect = $('#currencySelectRakip');
+
+        // Input elements
+        var rakipTl = $('#rakipTl');
+        var rakipDolor = $('#rakipDolor');
+        var rakipEuro = $('#rakipEuro');
+
+        // Event listener for select element
+        currencySelect.on('change', function () {
+            // Hide all input fields
+            rakipTl.hide();
+            rakipDolor.hide();
+            rakipEuro.hide();
+
+            // Show the selected currency input field
+            var selectedCurrency = $(this).val();
+            if (selectedCurrency === 'tl') {
+                rakipTl.show();
+            } else if (selectedCurrency === 'dolor') {
+                rakipDolor.show();
+            } else if (selectedCurrency === 'euro') {
+                rakipEuro.show();
+            }
+        });
+
+        // Format input values to currency format
+        $("input[name^='Rakip']").on({
+            keyup: function () {
+                formatCurrency($(this));
+            },
+            blur: function () {
+                formatCurrency($(this), "blur");
+            }
+        });
+
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function formatCurrency(input, blur) {
+            // Get input value
+            var input_val = input.val();
+
+            // Don't validate empty input
+            if (input_val === "") { return; }
+
+            // Original length
+            var original_len = input_val.length;
+
+            // Initial caret position
+            var caret_pos = input.prop("selectionStart");
+
+            // Check for decimal
+            if (input_val.indexOf(".") >= 0) {
+
+                // Get position of first decimal
+                var decimal_pos = input_val.indexOf(".");
+
+                // Split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                // Add commas to left side of number
+                left_side = formatNumber(left_side);
+
+                // Validate right side
+                right_side = formatNumber(right_side);
+
+                // On blur make sure 2 numbers after decimal
+                if (blur === "blur") {
+                    right_side += "00";
+                }
+
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
+
+                // Join number by .
+                input_val = left_side + "." + right_side;
+
+            } else {
+                // No decimal entered
+                // Add commas to number
+                // Remove all non-digits
+                input_val = formatNumber(input_val);
+
+                // Final formatting
+                if (blur === "blur") {
+                    input_val += ".00";
+                }
+            }
+
+            // Send updated string to input
+            input.val(input_val);
+
+            // Put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+    });
+
+</script>

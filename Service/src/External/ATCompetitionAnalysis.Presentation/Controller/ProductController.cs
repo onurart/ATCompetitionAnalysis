@@ -1,19 +1,13 @@
 ﻿using ATCompetitionAnalysis.Presentation.Abstraction;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Commands.CreateProductCustomerRelationship;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries.GetAllProductCustomerRelationship;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustomerRelationship.Queries.GetAllProductCustomerRelationshipQueryDto;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProduct;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductAll;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.CreateProductCompany;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.RemoveByIdProduct;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.UpdateProduct;
-using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Commands.UpdateProductIsActive;
 using CompetitionAnalysis.Application.Features.CompanyFeatures.ProductFeatures.Queries.GetAllProduct;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace ATCompetitionAnalysis.Presentation.Controller;
-//[Authorize(AuthenticationSchemes = "Bearer")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class ProductController : ApiController
 {
     public ProductController(IMediator mediator) : base(mediator) { }

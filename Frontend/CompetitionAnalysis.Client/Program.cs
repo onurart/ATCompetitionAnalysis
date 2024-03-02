@@ -5,24 +5,29 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IBrandRepository,BrandRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IIntelligengeService, IntelligengeService>();
+builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath = "/WebLogin/SignIn";
-        options.LogoutPath = "/Account/Logout";
+        options.LogoutPath = "/WebLogin/Logout";
         options.AccessDeniedPath = "/Account/AccessDenied";
         options.Cookie.SameSite = SameSiteMode.Strict;
         options.Cookie.HttpOnly = true;
         options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-        options.Cookie.Name = "ATBasketServerJwtCookie";
+        options.Cookie.Name = "CompetitionAnalysiswtCookie";
         options.Cookie.IsEssential = true;
     })
     .AddJwtBearer(options =>

@@ -1,0 +1,12 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Customer.Model
+@model List<CustomerModel>
+<div class="mb-3 col-md-6">
+    <label class="form-label">Rakip Seç <span class="text-danger">*</span></label>
+    <select class="default-select wide form-control" name="CustomerId" required="required">
+        <option value="">Rakip Seç </option>
+        @foreach (var value in  Model)
+        {
+            <option value="@value.Id">@value.Name</option>
+        }
+    </select>
+</div>

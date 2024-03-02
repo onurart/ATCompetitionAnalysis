@@ -1,0 +1,12 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Brand.Query
+    @model List<GetAllBrand>
+    <div class="mb-3 col-md-6">
+        <label class="form-label">Marka Seç <span class="text-danger">*</span></label>
+        <select class="default-select wide form-control" name="BrandId" required="required">
+            <option value="">Marka Seç </option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.BrandName</option>
+            }
+        </select>
+    </div>

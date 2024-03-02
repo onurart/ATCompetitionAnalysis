@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CompetitionAnalysis.Domain\CompetitionAnalysis.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\CompanyServices\CreateBrand\" />
-  </ItemGroup>
-
 </Project>

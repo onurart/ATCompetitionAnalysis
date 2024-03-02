@@ -51,6 +51,67 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                     b.ToTable("Brand", (string)null);
                 });
 
+            modelBuilder.Entity("CompetitionAnalysis.Domain.CompanyEntities.Campaign", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BrandId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Campaign", (string)null);
+                });
+
             modelBuilder.Entity("CompetitionAnalysis.Domain.CompanyEntities.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -196,6 +257,15 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("CurrencyDolor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("CurrencyEuro")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("CurrencyTl")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -205,11 +275,26 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                     b.Property<string>("Explanation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("RakipDolor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("RakipEuro")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("RakipTl")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Specieses")
                         .HasColumnType("int");
@@ -225,7 +310,86 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("ProductCustomerRelationship", (string)null);
+                });
+
+            modelBuilder.Entity("CompetitionAnalysis.Domain.CompanyEntities.SliderBanner", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CampaignId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SliderBanner", (string)null);
+                });
+
+            modelBuilder.Entity("CompetitionAnalysis.Domain.CompanyEntities.Campaign", b =>
+                {
+                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId");
+
+                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("CompetitionAnalysis.Domain.CompanyEntities.ProductCustomerRelationshipses", b =>
@@ -242,11 +406,17 @@ namespace CompetitionAnalysis.Persistance.Migrations.CompanyDb
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
+                    b.HasOne("CompetitionAnalysis.Domain.CompanyEntities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

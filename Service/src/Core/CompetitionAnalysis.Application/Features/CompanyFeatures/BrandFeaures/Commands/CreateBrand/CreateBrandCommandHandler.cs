@@ -1,6 +1,6 @@
 ﻿using CompetitionAnalysis.Application.Messaging;
-using CompetitionAnalysis.Application.Services;
 using CompetitionAnalysis.Application.Services.CompanyServices;
+using CompetitionAnalysis.Application.Services;
 using CompetitionAnalysis.Domain.CompanyEntities;
 using Newtonsoft.Json;
 
@@ -8,32 +8,30 @@ namespace CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.
 {
     public sealed class CreateBrandCommandHandler : ICommandHandler<CreateBrandCommand, CreateBrandCommandResponse>
     {
-        private readonly IBrandService _service;
-        private readonly ILogService _logger;
+        private readonly ILogService _logService;
         private readonly IApiService _apiService;
+        private readonly IBrandService _service;
 
-        public CreateBrandCommandHandler(IBrandService service, ILogService logger, IApiService apiService)
+        public CreateBrandCommandHandler(ILogService logService, IApiService apiService, IBrandService service)
         {
-            _service = service;
-            _logger = logger;
+            _logService = logService;
             _apiService = apiService;
+            _service = service;
         }
 
         public async Task<CreateBrandCommandResponse> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
         {
-            Brand entity = await _service.CreateBrandAsync(request, cancellationToken);
-
+            Brand createBrand = await _service.CreateBrandAsync(request, cancellationToken);
             string userId = _apiService.GetUserIdByToken();
             Log log = new()
             {
                 Id = Guid.NewGuid().ToString(),
-                TableName = nameof(Customer),
+                TableName = nameof(Brand),
                 Progress = "Create",
                 UserId = userId,
-                Data = JsonConvert.SerializeObject(entity)
+                Data = JsonConvert.SerializeObject(createBrand)
             };
-            await _logger.AddAsync(log, request.companyId);
-
+            await _logService.AddAsync(log, request.companyId);
             return new();
         }
     }

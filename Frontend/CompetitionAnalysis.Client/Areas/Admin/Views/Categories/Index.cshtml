@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="/Admin/Admin">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Kategori Listesi</a></li>
+            </ol>
+        </div>
+        <div class="">
+            <a href="/Admin/CreateCategory"
+                <button type="button" class="btn btn-danger w-20">
+                    Kategori Ekle <span class="btn-icon-end"><i class="fa fa-plus"></i></span>
+                </button></a>
+        </div>
+        <br />
+        @await Component.InvokeAsync("AdminCategoriesList")
+    </div>
+</div>

@@ -16,6 +16,17 @@ namespace CompetitionAnalysis.Application.Features.CompanyFeatures.ProductCustom
         string CompanyId,
         string BrandId,
         string CategoryId,
-       Specieses Specieses,string Explanation) : ICommand<CreateProductCustomerRelationshipResponse>;
+        string ProductId,
+       Specieses Specieses,
+       string Explanation,
+      
+       decimal CurrencyDolor,
+       decimal CurrencyEuro,
+       decimal CurrencyTl,
+       string ImageUrl,
+       decimal RakipDolor,
+       decimal RakipEuro,
+       decimal RakipTl
+        ) : ICommand<CreateProductCustomerRelationshipResponse>;
 
 }

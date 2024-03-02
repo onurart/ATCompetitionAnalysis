@@ -1,0 +1,79 @@
+﻿@using CompetitionAnalysis.Core.Features.CompanyFeatures.Customer.Model
+@using DevExtreme.AspNet.Mvc
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="/Admin/Admin">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Rakip Listesi</a></li>
+            </ol>
+        </div>
+        <div class="">
+            <a href="/Admin/CreateCategory"
+                <button type="button" class="btn btn-danger w-20">
+                    Rakip Ekle <span class="btn-icon-end"><i class="fa fa-plus"></i></span>
+                </button></a>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            @(
+                                Html.DevExtreme().DataGrid<CustomerModel>()
+                                .DataSource(d => d.Mvc()
+                                .Controller("Admin")
+                                .LoadAction("CustomerGridList")
+                                .Key("Id"))
+                                .ID("Id")
+                                .ColumnChooser(cc => cc.Enabled(true).Mode(GridColumnChooserMode.Select))
+                                .ColumnMinWidth(100)
+                                .ColumnAutoWidth(true)
+                                .ShowColumnLines(false)
+                                .ShowRowLines(true)
+                                .RowAlternationEnabled(true)
+                                .ShowBorders(false)
+                                .Paging(paging => paging.PageSize(9))
+                                .Pager(pager =>
+                                {
+                                    pager.Visible(true);
+                                    pager.DisplayMode(GridPagerDisplayMode.Full);
+                                    pager.ShowPageSizeSelector(true);
+                                    pager.AllowedPageSizes(new JS("[5, 10, 30, 70, 120,'all']"));
+                                    pager.ShowInfo(true);
+                                    pager.ShowNavigationButtons(true);
+                                })
+                                .Columns(columns =>
+                                {
+                                    @*  columns.Add().Caption("İŞLEM").CssClass("btnx btn-infox btn-smx")
+                            .CellTemplate(@<text>
+                            <input type="button" class="btnx btn-infox btn-smx" onclick="location.href='@Url.Action("", "")/<%= data.Id %>';" value="Detay" />
+                            </text>);
+                            *@
+                                    columns.AddFor(m => m.Name).Caption("KATEGORİ ADI").CssClass("text-left text-uppercase");
+                                })
+                                .FilterRow(f => f.Visible(true))
+                                .HeaderFilter(f => f.Visible(true))
+                                .Height(750)
+                                .FocusedRowEnabled(true)
+                                .FocusedRowKey(1)
+                                .ElementAttr("class", "")
+                                .Grouping(g => g.AutoExpandAll(false))
+                                )
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

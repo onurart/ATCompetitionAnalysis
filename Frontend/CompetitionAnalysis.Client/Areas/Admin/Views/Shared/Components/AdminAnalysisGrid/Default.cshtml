@@ -19,8 +19,8 @@
 
     .btn-infox {
         color: #fff;
-        background-color: #17a2b8;
-        border-color: #17a2b8;
+        background-color: #fff;
+        border-color: #fff;
     }
 
     .btn-smx {
@@ -31,10 +31,23 @@
     }
 
     .btnx.btn-infox.btn-smx {
-        background-color: #17a2b8; /* Set the desired background color */
+        background-color: #dc3545; 
+        display: inline-grid;
     }
 </style>
-@(Html.DevExtreme().DataGrid<GetProductCustomerRelationship>()
+
+
+<div class="content-body">
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="/Admin/Admin">Ana Sayfa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Kategori Listesi</a></li>
+            </ol>
+        </div>
+        <br />
+        @(Html.DevExtreme().DataGrid<GetProductCustomerRelationship>()
                 .DataSource(d => d.Mvc()
                 .Controller("Home")
                 .LoadAction("GetAlGetProductCustomerRelationship")
@@ -47,7 +60,7 @@
                 .ShowRowLines(true)
                 .RowAlternationEnabled(true)
                 .ShowBorders(false)
-                .Paging(paging => paging.PageSize(9))
+                .Paging(paging => paging.PageSize(20))
                 .Pager(pager =>
                 {
                     pager.Visible(true);
@@ -69,16 +82,21 @@
                     columns.AddFor(m => m.BrandName).Caption("MARKA").CssClass("text-left text-uppercase");
                     columns.AddFor(m => m.CategoryName).Caption("KATEGORİ").CssClass("text-left text-uppercase");
                     columns.AddFor(m => m.Explanation).Caption("AÇİKLAMA").CssClass("text-left text-uppercase");
-@*                    
+                   
                     columns.AddFor(m => m.ProductName).Caption("ÜRÜN ADI").CssClass("text-left text-uppercase");
                     columns.AddFor(m => m.Price).Caption("MOTOR FİYATI").CssClass("text-left text-uppercase");
-                    columns.AddFor(m => m.ProductPrice).Caption("PİYASA FİYATİ").CssClass("text-left text-uppercase"); *@
+                    columns.AddFor(m => m.ProductPrice).Caption("PİYASA FİYATİ").CssClass("text-left text-uppercase");
 
                 })
-                .FilterRow(f => f.Visible(true))
-                .HeaderFilter(f => f.Visible(true))
-                .Height(400)
-                .FocusedRowEnabled(true)
-                .FocusedRowKey(1)
-                .ElementAttr("class", "")
-                .Grouping(g => g.AutoExpandAll(false)))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+            .Height(800)
+            .ElementAttr("class", "")
+            .Grouping(g => g.AutoExpandAll(false))
+            .GroupPanel(p => p.Visible(true))
+            .Scrolling(s => s.Mode(GridScrollingMode.Virtual))
+            .RemoteOperations(true)
+            .Grouping(g => g.AutoExpandAll(false)))
+ 
+    </div>
+</div>

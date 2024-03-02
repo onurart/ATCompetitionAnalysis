@@ -17,7 +17,8 @@ namespace CompetitionAnalysis.Persistance.Services.CompanyServices
         private readonly IMapper _mapper;
         private readonly ICompanyDbUnitOfWork _unitOfWork;
         private CompanyDbContext _context;
-        public CategoryService(ICategoryCommandRepository categoryCommandRepository, ICategoryQueryRepository categoryQueryRepository, IContextService contextService, IMapper mapper, ICompanyDbUnitOfWork unitOfWork)
+        public CategoryService(ICategoryCommandRepository categoryCommandRepository, ICategoryQueryRepository categoryQueryRepository,
+        IContextService contextService, IMapper mapper, ICompanyDbUnitOfWork unitOfWork)
         {
             _categoryCommandRepository = categoryCommandRepository;
             _categoryQueryRepository = categoryQueryRepository;

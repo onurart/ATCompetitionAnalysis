@@ -2,5 +2,6 @@
 
 namespace CompetitionAnalysis.Application.Features.CompanyFeatures.BrandFeaures.Queries.GetAllBrand
 {
-    public sealed record GetAllBrandQuery(string CompanyId):IQuery<GetAllBrandQueryResponse>;
-}
+    public sealed record  GetAllBrandQuery(string CompanyId) : IQuery<GetAllBrandQueryResponse>;
+ 
+   }
